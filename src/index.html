@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification Exam Practice</title>
+    <link rel="stylesheet" href="css/exam-styles.css">
+</head>
+<body>
+    <div id="mainContainer">
+        <!-- Content will be dynamically loaded here -->
+        <div style="text-align: center; padding: 50px;">
+            <h2>🔄 Loading Exams...</h2>
+            <p>Please wait while we load available certification exams.</p>
+        </div>
+    </div>
+
+    <!-- Core application scripts -->
+    <script src="js/exam-registry.js"></script>
+    <script src="js/exam-app.js"></script>
+    <script src="js/exam-functions.js"></script>
+    
+    <!-- Initialize the application -->
+    <script>
+        // Ensure all scripts are loaded before initializing
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, checking exam registry...');
+            if (typeof examRegistry !== 'undefined' && typeof ExamPracticeApp !== 'undefined') {
+                console.log('Exam registry loaded with exams:', Object.keys(examRegistry));
+                window.app = new ExamPracticeApp();
+                window.app.init();
+            } else {
+                console.error('Required dependencies not loaded:', {
+                    examRegistry: typeof examRegistry,
+                    ExamPracticeApp: typeof ExamPracticeApp
+                });
+                document.getElementById('mainContainer').innerHTML = 
+                    '<div style="text-align: center; padding: 50px; color: red;"><h2>❌ Loading Error</h2><p>Failed to load exam dependencies. Please refresh the page.</p></div>';
+            }
+        });
+    </script>
+</body>
+</html>
