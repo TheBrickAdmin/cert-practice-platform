@@ -88,7 +88,7 @@ class ExamPracticeApp {
         const container = document.getElementById('mainContainer');
         container.innerHTML = `
             <div class="exam-selector">
-                <h1>🎓 Certification Exam Practice</h1>
+                <h1>🤖 test.PILOT: Certification Exam Practice</h1>
                 <p>Select an exam to start practicing. All exams feature question flagging and progress tracking:</p>
                 
                 <div class="exam-list">
