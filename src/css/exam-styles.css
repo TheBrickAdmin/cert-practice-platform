@@ -1,7 +1,11 @@
 /* Exam Practice Application Styles */
 
+/* Import the Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 400;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -26,7 +30,7 @@ body {
 }
 
 .exam-card {
-    background: rgba(255,255,255,0.95);
+    background: rgba(243, 243, 243, 0.95);
     color: #333;
     padding: 25px;
     border-radius: 12px;
@@ -44,7 +48,7 @@ body {
 .exam-card h3 {
     margin-top: 0;
     color: #007acc;
-    border-bottom: 2px solid #007acc;
+    border-bottom: 1px solid #007acc;
     padding-bottom: 10px;
 }
 
@@ -76,7 +80,7 @@ body {
 .exam-features h3 {
     color: #007acc;
     margin-top: 0;
-    border-bottom: 2px solid #007acc;
+    border-bottom: 1px solid #007acc;
     padding-bottom: 10px;
 }
 
