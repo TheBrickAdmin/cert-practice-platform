@@ -8,7 +8,7 @@ const examRegistry = {
         description: 'Practice exam for the Certified Argo Project Associate certification covering Argo CD, Argo Workflows, Argo Events, and Argo Rollouts.',
         file: 'exams/capa-exam-v1.0.js',
         version: '1.0',
-        totalQuestions: 100,
+        totalQuestions: 60,
         passingScore: 75,
         timeLimit: 120,
         topics: ['Argo CD', 'Argo Workflows', 'Argo Events', 'Argo Rollouts', 'GitOps Fundamentals', 'Kubernetes Integration'],
