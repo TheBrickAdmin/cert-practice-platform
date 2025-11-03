@@ -29,8 +29,8 @@ const capaQuestions = [
         question: "What is the primary purpose of Argo CD?",
         options: [
             "To provide a web-based IDE for Kubernetes development",
-            "To serve as a declarative, GitOps continuous delivery tool for Kubernetes",
             "To monitor Kubernetes cluster performance and metrics",
+            "To serve as a declarative, GitOps continuous delivery tool for Kubernetes",
             "To manage Kubernetes networking and service mesh configurations"
         ],
         answer: "To serve as a declarative, GitOps continuous delivery tool for Kubernetes",
@@ -53,8 +53,8 @@ const capaQuestions = [
         question: "What is an Argo CD Application?",
         options: [
             "A Kubernetes pod that runs application containers",
-            "A custom resource that defines source repository, target cluster, and synchronization policies",
             "A Git repository containing application source code",
+            "A custom resource that defines source repository, target cluster, and synchronization policies",
             "A Docker image registry for storing container images"
         ],
         answer: "A custom resource that defines source repository, target cluster, and synchronization policies",
@@ -65,8 +65,8 @@ const capaQuestions = [
         question: "What is the purpose of Argo CD's Application Controller?",
         options: [
             "To provide a web interface for managing applications",
-            "To store application configurations in a database",
             "To monitor Application resources, pull configurations from Git, and apply them to target clusters",
+            "To store application configurations in a database",
             "To handle user authentication and authorization"
         ],
         answer: "To monitor Application resources, pull configurations from Git, and apply them to target clusters",
@@ -76,9 +76,9 @@ const capaQuestions = [
         id: 5,
         question: "Which component of Argo CD provides the web-based user interface?",
         options: [
-            "Application Controller",
-            "Repository Server",
             "Argo CD Server",
+            "Repository Server",
+            "Application Controller",
             "Dex Identity Service"
         ],
         answer: "Argo CD Server",
@@ -89,9 +89,9 @@ const capaQuestions = [
         question: "What is the purpose of the Repository Server in Argo CD?",
         options: [
             "To store Git repositories locally within the cluster",
-            "To clone Git repositories, render Kubernetes manifests, and cache rendered manifests",
+            "To synchronize changes between multiple Git repositories",
             "To manage user permissions for repository access",
-            "To synchronize changes between multiple Git repositories"
+            "To clone Git repositories, render Kubernetes manifests, and cache rendered manifests"
         ],
         answer: "To clone Git repositories, render Kubernetes manifests, and cache rendered manifests",
         explanation: "The Repository Server isolates the repository access logic and provides manifest generation services. It supports multiple configuration management tools and caches results to improve performance."
@@ -125,9 +125,9 @@ const capaQuestions = [
         question: "What is a sync wave in Argo CD?",
         options: [
             "A batch of applications that are synchronized together",
-            "An annotation that controls the order in which resources are applied during synchronization",
+            "A method for grouping related applications",
             "A rolling update strategy for deployments",
-            "A method for grouping related applications"
+            "An annotation that controls the order in which resources are applied during synchronization"
         ],
         answer: "An annotation that controls the order in which resources are applied during synchronization",
         explanation: "Sync waves enable fine-grained control over resource application order, which is crucial for dependencies like databases needing to be ready before applications, or ConfigMaps before Deployments."
@@ -137,8 +137,8 @@ const capaQuestions = [
         question: "What is the purpose of Argo CD's health checks?",
         options: [
             "To monitor the health of Git repositories",
-            "To determine whether deployed resources are running correctly and ready to serve traffic",
             "To check the connectivity between Argo CD and target clusters",
+            "To determine whether deployed resources are running correctly and ready to serve traffic",
             "To validate YAML syntax in Git repositories"
         ],
         answer: "To determine whether deployed resources are running correctly and ready to serve traffic",
@@ -160,8 +160,8 @@ const capaQuestions = [
         id: 12,
         question: "What is a Workflow template in Argo Workflows?",
         options: [
-            "A Git repository structure for organizing workflow files",
             "A reusable workflow definition that can be parameterized and instantiated multiple times",
+            "A Git repository structure for organizing workflow files",
             "A Kubernetes deployment configuration for workflow controllers",
             "A monitoring dashboard template for tracking workflow execution"
         ],
@@ -173,8 +173,8 @@ const capaQuestions = [
         question: "What are the main step types available in Argo Workflows?",
         options: [
             "Build steps, test steps, deploy steps, and monitor steps",
-            "Container steps, script steps, resource steps, and suspend steps",
             "Sequential steps, parallel steps, conditional steps, and loop steps",
+            "Container steps, script steps, resource steps, and suspend steps",
             "Input steps, processing steps, output steps, and validation steps"
         ],
         answer: "Container steps, script steps, resource steps, and suspend steps",
@@ -185,8 +185,8 @@ const capaQuestions = [
         question: "What is the purpose of artifacts in Argo Workflows?",
         options: [
             "To store workflow execution logs and debugging information",
-            "To pass data between workflow steps using external storage",
             "To define the container images used in workflow steps",
+            "To pass data between workflow steps using external storage",
             "To configure network policies for workflow execution"
         ],
         answer: "To pass data between workflow steps using external storage",
@@ -209,8 +209,8 @@ const capaQuestions = [
         question: "What is the Workflow Controller in Argo Workflows?",
         options: [
             "A user interface component for managing workflows through a web browser",
-            "The core component that watches for Workflow resources and manages their lifecycle",
             "A security component that controls access to workflow execution",
+            "The core component that watches for Workflow resources and manages their lifecycle",
             "A monitoring service that collects metrics from running workflows"
         ],
         answer: "The core component that watches for Workflow resources and manages their lifecycle",
@@ -221,9 +221,9 @@ const capaQuestions = [
         question: "What is Argo Events used for?",
         options: [
             "Monitoring and alerting for Kubernetes cluster events",
-            "Event-driven workflow automation that triggers actions in response to various events",
+            "Real-time streaming of application performance metrics",
             "Logging and auditing of application deployment events",
-            "Real-time streaming of application performance metrics"
+            "Event-driven workflow automation that triggers actions in response to various events"
         ],
         answer: "Event-driven workflow automation that triggers actions in response to various events",
         explanation: "Argo Events enables reactive automation by connecting event sources (webhooks, message queues, file systems) with event triggers that can launch workflows, update applications, or perform other automated actions."
@@ -244,8 +244,8 @@ const capaQuestions = [
         id: 19,
         question: "What are Sensors in Argo Events?",
         options: [
-            "Hardware devices that monitor physical infrastructure conditions",
             "Resources that listen for events and trigger actions based on event conditions",
+            "Hardware devices that monitor physical infrastructure conditions",
             "Monitoring agents that collect metrics from Kubernetes clusters",
             "Network security components that detect intrusion attempts"
         ],
@@ -269,9 +269,9 @@ const capaQuestions = [
         question: "What is Argo Rollouts primarily designed for?",
         options: [
             "Managing Kubernetes cluster networking and DNS resolution",
-            "Providing advanced deployment strategies like blue-green and canary deployments",
+            "Storing and versioning container images in a registry",
             "Monitoring application performance and generating real-time alerts",
-            "Storing and versioning container images in a registry"
+            "Providing advanced deployment strategies like blue-green and canary deployments"
         ],
         answer: "Providing advanced deployment strategies like blue-green and canary deployments",
         explanation: "Argo Rollouts extends Kubernetes Deployments with sophisticated deployment patterns that enable safer releases through gradual traffic shifting, automated metrics analysis, and automatic rollback on failure detection."
@@ -293,8 +293,8 @@ const capaQuestions = [
         question: "What is the difference between blue-green and canary deployment strategies?",
         options: [
             "Blue-green is for databases while canary is for applications",
-            "Blue-green switches all traffic at once between environments; canary gradually shifts traffic",
             "Blue-green requires manual approval while canary is fully automated",
+            "Blue-green switches all traffic at once between environments; canary gradually shifts traffic",
             "Blue-green uses containers while canary uses virtual machines"
         ],
         answer: "Blue-green switches all traffic at once between environments; canary gradually shifts traffic",
@@ -304,10 +304,10 @@ const capaQuestions = [
         id: 24,
         question: "What are Analysis Templates in Argo Rollouts?",
         options: [
-            "Templates that define metrics queries and success criteria for automated deployment decisions",
+            "User interface templates for deployment monitoring dashboards",
             "Database schemas for storing deployment history and audit logs",
             "Network configuration templates for service mesh integration",
-            "User interface templates for deployment monitoring dashboards"
+            "Templates that define metrics queries and success criteria for automated deployment decisions"
         ],
         answer: "Templates that define metrics queries and success criteria for automated deployment decisions",
         explanation: "Analysis Templates integrate with monitoring systems like Prometheus, Datadog, or New Relic to provide data-driven deployment decisions, reducing the risk of deploying problematic releases."
@@ -316,8 +316,8 @@ const capaQuestions = [
         id: 25,
         question: "What is the Rollouts Controller?",
         options: [
-            "A web interface for manually managing deployment rollouts",
             "A component that manages Rollout resources and orchestrates deployment strategies",
+            "A web interface for manually managing deployment rollouts",
             "A database that stores rollout history and configuration",
             "A network proxy that handles traffic routing during deployments"
         ],
@@ -329,9 +329,9 @@ const capaQuestions = [
         question: "How does Argo CD handle secrets management?",
         options: [
             "Stores all secrets directly in Git repositories for version control",
-            "Integrates with external secret management systems rather than storing secrets in Git",
+            "Requires all secrets to be manually entered through the web interface",
             "Encrypts secrets using built-in AES encryption before storing in Git",
-            "Requires all secrets to be manually entered through the web interface"
+            "Integrates with external secret management systems rather than storing secrets in Git"
         ],
         answer: "Integrates with external secret management systems rather than storing secrets in Git",
         explanation: "Since Git repositories should not contain sensitive data, Argo CD works with secret management solutions that inject secrets at deployment time from secure external stores like HashiCorp Vault or cloud provider secret services."
@@ -340,8 +340,8 @@ const capaQuestions = [
         id: 27,
         question: "What is the purpose of Argo CD Projects?",
         options: [
-            "To provide IDE integration for application development",
             "To offer logical grouping of applications with shared policies and RBAC restrictions",
+            "To provide IDE integration for application development",
             "To manage container image building and registry operations",
             "To handle database migrations and schema versioning"
         ],
@@ -364,8 +364,8 @@ const capaQuestions = [
         id: 29,
         question: "What are the supported generators in Argo CD ApplicationSets?",
         options: [
-            "Container generators, image generators, and registry generators",
             "Git directory, Git file, Cluster, List, and Matrix generators",
+            "Container generators, image generators, and registry generators",
             "Database generators, API generators, and webhook generators",
             "Network generators, storage generators, and compute generators"
         ],
@@ -376,8 +376,8 @@ const capaQuestions = [
         id: 30,
         question: "What is the refresh annotation in Argo CD?",
         options: [
-            "An annotation that schedules automatic application updates every hour",
             "An annotation that forces immediate refresh of application state from Git",
+            "An annotation that schedules automatic application updates every hour",
             "An annotation that enables real-time monitoring of application health",
             "An annotation that triggers automatic scaling of application resources"
         ],
@@ -412,9 +412,9 @@ const capaQuestions = [
         id: 33,
         question: "What are pre-sync and post-sync hooks in Argo CD?",
         options: [
-            "Hooks that run during cluster maintenance windows only",
-            "Database backup operations that run automatically",
             "Tasks that run before and after synchronization operations",
+            "Database backup operations that run automatically",
+            "Hooks that run during cluster maintenance windows only",
             "Security scans that validate deployment configurations"
         ],
         answer: "Tasks that run before and after synchronization operations",
@@ -425,8 +425,8 @@ const capaQuestions = [
         question: "What is the significance of the `argocd.argoproj.io/sync-options` annotation?",
         options: [
             "It defines the Git repository branch to sync from",
-            "It controls sync behavior for specific resources with various options",
             "It sets the synchronization schedule for applications",
+            "It controls sync behavior for specific resources with various options",
             "It configures user access permissions for applications"
         ],
         answer: "It controls sync behavior for specific resources with various options",
@@ -449,9 +449,9 @@ const capaQuestions = [
         question: "How does Argo Workflows handle workflow parameter passing?",
         options: [
             "Parameters can only be hardcoded in workflow templates and cannot be changed at runtime",
-            "Workflows support parameters passed at submission time with default values in templates",
+            "Workflow parameters are only supported through environment variables",
             "Parameters must be stored in external databases and fetched during execution",
-            "Workflow parameters are only supported through environment variables"
+            "Workflows support parameters passed at submission time with default values in templates"
         ],
         answer: "Workflows support parameters passed at submission time with default values in templates",
         explanation: "Parameters enable workflow reusability by allowing the same workflow template to be executed with different inputs, supporting both simple values and complex objects for flexible workflow execution."
@@ -485,8 +485,8 @@ const capaQuestions = [
         question: "How does Argo Workflows handle workflow scheduling?",
         options: [
             "Workflows can only be triggered manually through the web interface",
-            "Workflows are scheduled using CronWorkflows or triggered by external events",
             "All workflows run continuously in a loop until manually stopped",
+            "Workflows are scheduled using CronWorkflows or triggered by external events",
             "Workflows require external cron jobs on the host operating system"
         ],
         answer: "Workflows are scheduled using CronWorkflows or triggered by external events",
@@ -497,8 +497,8 @@ const capaQuestions = [
         question: "What are workflow submission options in Argo Workflows?",
         options: [
             "Configuration files that define workflow templates and dependencies",
-            "Parameters, labels, annotations, service accounts, and priority settings for execution control",
             "Network policies that control workflow access to external services",
+            "Parameters, labels, annotations, service accounts, and priority settings for execution control",
             "Database schemas for storing workflow execution results"
         ],
         answer: "Parameters, labels, annotations, service accounts, and priority settings for execution control",
@@ -509,8 +509,8 @@ const capaQuestions = [
         question: "What is the role of the Workflow Archive in Argo Workflows?",
         options: [
             "To store workflow templates for reuse across different projects",
-            "To store completed workflow information for historical analysis and auditing",
             "To backup workflow configurations to external storage systems",
+            "To store completed workflow information for historical analysis and auditing",
             "To compress workflow logs to save storage space"
         ],
         answer: "To store completed workflow information for historical analysis and auditing",
@@ -532,8 +532,8 @@ const capaQuestions = [
         id: 43,
         question: "What are event dependencies in Argo Events?",
         options: [
-            "Network connectivity requirements for event processing components",
             "Dependencies that define which events a sensor must receive before triggering actions",
+            "Network connectivity requirements for event processing components",
             "Database relationships between different event types",
             "Software library dependencies required for event source compilation"
         ],
@@ -545,8 +545,8 @@ const capaQuestions = [
         question: "How does Argo Events handle event transformation?",
         options: [
             "Events cannot be transformed and must be processed in their original format",
-            "Event transformation occurs in sensors through data transformers that modify payloads",
             "Transformation requires external ETL tools and cannot be done within Argo Events",
+            "Event transformation occurs in sensors through data transformers that modify payloads",
             "Events are automatically transformed using machine learning algorithms"
         ],
         answer: "Event transformation occurs in sensors through data transformers that modify payloads",
@@ -557,9 +557,9 @@ const capaQuestions = [
         question: "What triggers can be configured in Argo Events?",
         options: [
             "Only Kubernetes resource triggers are supported for cluster operations",
-            "Common triggers include Argo Workflows, Kubernetes resources, HTTP requests, and serverless functions",
+            "Only webhook triggers are supported for external system integration",
             "Triggers are limited to database operations and file system changes",
-            "Only webhook triggers are supported for external system integration"
+            "Common triggers include Argo Workflows, Kubernetes resources, HTTP requests, and serverless functions"
         ],
         answer: "Common triggers include Argo Workflows, Kubernetes resources, HTTP requests, and serverless functions",
         explanation: "The variety of trigger types enables integration with diverse systems and automation patterns, from container orchestration to serverless functions and message-based systems."
@@ -568,8 +568,8 @@ const capaQuestions = [
         id: 46,
         question: "What is traffic splitting in Argo Rollouts?",
         options: [
-            "A network security feature that isolates application traffic",
             "Gradually shifting traffic between old and new versions during canary deployments",
+            "A network security feature that isolates application traffic",
             "A load balancing algorithm for distributing requests across pods",
             "A monitoring technique for analyzing network traffic patterns"
         ],
@@ -581,9 +581,9 @@ const capaQuestions = [
         question: "How does Argo Rollouts integrate with service meshes?",
         options: [
             "Argo Rollouts cannot integrate with service meshes and requires custom load balancers",
-            "Integration with service meshes like Istio and Linkerd for advanced traffic management",
+            "Integration requires custom plugins that must be developed for each service mesh",
             "Service mesh integration is only available for blue-green deployments",
-            "Integration requires custom plugins that must be developed for each service mesh"
+            "Integration with service meshes like Istio and Linkerd for advanced traffic management"
         ],
         answer: "Integration with service meshes like Istio and Linkerd for advanced traffic management",
         explanation: "Service mesh integration provides sophisticated traffic control, including header-based routing, geographic distribution, and fine-grained traffic policies that enhance deployment safety and flexibility."
@@ -593,9 +593,9 @@ const capaQuestions = [
         question: "What are analysis runs in Argo Rollouts?",
         options: [
             "Diagnostic tools for debugging rollout configuration errors",
-            "Metric queries that automatically determine deployment success or failure during rollouts",
+            "Security scans that validate deployment configurations before release",
             "Performance benchmarks that compare old and new application versions",
-            "Security scans that validate deployment configurations before release"
+            "Metric queries that automatically determine deployment success or failure during rollouts"
         ],
         answer: "Metric queries that automatically determine deployment success or failure during rollouts",
         explanation: "Analysis runs provide automated quality gates by integrating with monitoring systems to evaluate deployment success based on real performance data rather than just deployment completion."
@@ -617,8 +617,8 @@ const capaQuestions = [
         question: "How does Argo Rollouts handle rollback scenarios?",
         options: [
             "Rollbacks must be performed manually by deleting and recreating deployments",
-            "Rollbacks can be triggered automatically based on failed analysis or manually by operators",
             "Rollbacks are only possible during blue-green deployments, not canary deployments",
+            "Rollbacks can be triggered automatically based on failed analysis or manually by operators",
             "Rollbacks require external tools and cannot be handled within Argo Rollouts"
         ],
         answer: "Rollbacks can be triggered automatically based on failed analysis or manually by operators",
@@ -628,8 +628,8 @@ const capaQuestions = [
         id: 51,
         question: "What is the significance of the `.argocd` directory in Git repositories?",
         options: [
-            "It contains compiled application binaries for faster deployment",
             "It stores Argo CD-specific configurations like application definitions and repository policies",
+            "It contains compiled application binaries for faster deployment",
             "It holds encrypted secrets that are decrypted during deployment",
             "It contains backup copies of application configurations for disaster recovery"
         ],
@@ -665,8 +665,8 @@ const capaQuestions = [
         question: "What are resource hooks in Argo CD?",
         options: [
             "Network connections that link Argo CD to external monitoring systems",
-            "Kubernetes jobs or pods that execute at specific points in the synchronization lifecycle",
             "API endpoints that receive webhooks from Git repositories",
+            "Kubernetes jobs or pods that execute at specific points in the synchronization lifecycle",
             "Security mechanisms that prevent unauthorized access to application resources"
         ],
         answer: "Kubernetes jobs or pods that execute at specific points in the synchronization lifecycle",
@@ -676,8 +676,8 @@ const capaQuestions = [
         id: 55,
         question: "How does Argo CD handle application dependencies?",
         options: [
-            "Argo CD has built-in dependency management that automatically orders application deployments",
             "Application dependencies can be managed using sync waves or external tools like ApplicationSets",
+            "Argo CD has built-in dependency management that automatically orders application deployments",
             "Dependencies must be handled by external CI/CD tools before deploying to Argo CD",
             "Argo CD does not support any form of application dependency management"
         ],
@@ -688,8 +688,8 @@ const capaQuestions = [
         id: 56,
         question: "What is the role of the dex component in Argo CD?",
         options: [
-            "Dex manages container image registries and handles image pulling operations",
             "Dex is an identity service that provides OIDC authentication for external identity providers",
+            "Dex manages container image registries and handles image pulling operations",
             "Dex handles network routing and load balancing for Argo CD components",
             "Dex manages database connections and data persistence for application state"
         ],
@@ -700,8 +700,8 @@ const capaQuestions = [
         id: 57,
         question: "What are the different sync policies available in Argo CD?",
         options: [
-            "Only manual sync is supported to ensure maximum control over deployments",
             "Manual sync, automatic sync, and automated sync with self-healing options are available",
+            "Only manual sync is supported to ensure maximum control over deployments",
             "Sync policies are determined by the Git repository structure and cannot be configured",
             "Only automatic sync is supported to enable true continuous deployment"
         ],
@@ -725,8 +725,8 @@ const capaQuestions = [
         question: "What are workflow templates vs. cluster workflow templates?",
         options: [
             "Workflow templates are for development environments while cluster templates are for production",
-            "Workflow templates are namespace-scoped while cluster workflow templates are cluster-scoped",
             "There is no difference; both terms refer to the same functionality",
+            "Workflow templates are namespace-scoped while cluster workflow templates are cluster-scoped",
             "Workflow templates use YAML while cluster templates use JSON format"
         ],
         answer: "Workflow templates are namespace-scoped while cluster workflow templates are cluster-scoped",
@@ -737,8 +737,8 @@ const capaQuestions = [
         question: "How does Argo Workflows handle resource management?",
         options: [
             "Resource management is handled entirely by Kubernetes and cannot be configured in workflows",
-            "Resource management includes CPU/memory limits, quotas, priority classes, and Kubernetes integration",
             "Resources are allocated equally to all workflow steps and cannot be customized",
+            "Resource management includes CPU/memory limits, quotas, priority classes, and Kubernetes integration",
             "Resource management requires external tools and is not supported within Argo Workflows"
         ],
         answer: "Resource management includes CPU/memory limits, quotas, priority classes, and Kubernetes integration",
@@ -749,8 +749,8 @@ const capaQuestions = [
         question: "What is the purpose of workflow step groups?",
         options: [
             "To organize workflow templates into logical categories for better management",
-            "To allow multiple steps to run in parallel within the same pod, sharing resources",
             "To group workflows by priority level for resource allocation purposes",
+            "To allow multiple steps to run in parallel within the same pod, sharing resources",
             "To create security boundaries between different workflow execution contexts"
         ],
         answer: "To allow multiple steps to run in parallel within the same pod, sharing resources",
@@ -761,9 +761,9 @@ const capaQuestions = [
         question: "How does Argo Events handle event source high availability?",
         options: [
             "Event sources automatically replicate across multiple clusters for geographic redundancy",
-            "Event sources can be deployed with multiple replicas using leader election to prevent duplication",
+            "Event sources run as singletons and do not support high availability configurations",
             "High availability requires external load balancers and cannot be handled within Argo Events",
-            "Event sources run as singletons and do not support high availability configurations"
+            "Event sources can be deployed with multiple replicas using leader election to prevent duplication"
         ],
         answer: "Event sources can be deployed with multiple replicas using leader election to prevent duplication",
         explanation: "HA deployment patterns ensure continuous event processing even during pod failures while preventing duplicate event processing through coordination mechanisms."
@@ -773,8 +773,8 @@ const capaQuestions = [
         question: "What are the security considerations for Argo Events?",
         options: [
             "Security is handled entirely by Kubernetes RBAC and no additional configuration is needed",
-            "Security includes webhook authentication, RBAC for sensors, network policies, and credential management",
             "Argo Events has no security features and relies on external security tools",
+            "Security includes webhook authentication, RBAC for sensors, network policies, and credential management",
             "Security is only needed for production environments and can be ignored in development"
         ],
         answer: "Security includes webhook authentication, RBAC for sensors, network policies, and credential management",
@@ -784,8 +784,8 @@ const capaQuestions = [
         id: 64,
         question: "How does Argo Events handle event ordering and delivery guarantees?",
         options: [
-            "All events are processed in strict chronological order regardless of the EventBus implementation",
             "Event ordering and delivery guarantees depend on the underlying EventBus implementation",
+            "All events are processed in strict chronological order regardless of the EventBus implementation",
             "Events are processed randomly with no ordering or delivery guarantees",
             "Ordering is guaranteed but delivery is best-effort for all EventBus implementations"
         ],
@@ -796,8 +796,8 @@ const capaQuestions = [
         id: 65,
         question: "What is the concept of event context in Argo Events?",
         options: [
-            "Event context refers to the execution environment where event processing occurs",
             "Event context provides metadata about events including source information and processing history",
+            "Event context refers to the execution environment where event processing occurs",
             "Event context is the network configuration required for event transmission",
             "Event context refers to the user permissions needed to process events"
         ],
@@ -809,9 +809,9 @@ const capaQuestions = [
         question: "How does Argo Rollouts handle database migrations during deployments?",
         options: [
             "Database migrations are not supported and must be handled by external tools",
-            "Database migrations can be handled using pre-sync hooks, migration jobs, or blue-green strategies",
+            "Database migrations are only supported in canary deployments, not blue-green",
             "Migrations are automatically detected and executed without configuration",
-            "Database migrations are only supported in canary deployments, not blue-green"
+            "Database migrations can be handled using pre-sync hooks, migration jobs, or blue-green strategies"
         ],
         answer: "Database migrations can be handled using pre-sync hooks, migration jobs, or blue-green strategies",
         explanation: "Migration strategies must consider database schema compatibility, rollback scenarios, and data consistency during the deployment process to avoid service disruption."
@@ -821,9 +821,9 @@ const capaQuestions = [
         question: "What are the metrics and monitoring capabilities in Argo Rollouts?",
         options: [
             "Monitoring is limited to basic deployment status and does not support custom metrics",
-            "Argo Rollouts provides Prometheus metrics, external monitoring integration, and custom metrics support",
+            "Monitoring requires external tools and is not built into Argo Rollouts",
             "Metrics are only available through the web interface and cannot be exported",
-            "Monitoring requires external tools and is not built into Argo Rollouts"
+            "Argo Rollouts provides Prometheus metrics, external monitoring integration, and custom metrics support"
         ],
         answer: "Argo Rollouts provides Prometheus metrics, external monitoring integration, and custom metrics support",
         explanation: "Comprehensive monitoring enables visibility into deployment health, progress tracking, and automated decision-making based on both technical and business metrics."
@@ -844,8 +844,8 @@ const capaQuestions = [
         id: 69,
         question: "What is the notification system in Argo Rollouts?",
         options: [
-            "Notifications are only available through the web interface and cannot be automated",
             "Argo Rollouts can send notifications through webhooks to systems like Slack and email",
+            "Notifications are only available through the web interface and cannot be automated",
             "Notification systems must be implemented externally and are not part of Argo Rollouts",
             "Notifications are limited to deployment failures and do not include success events"
         ],
@@ -857,9 +857,9 @@ const capaQuestions = [
         question: "How does Argo CD handle large Git repositories?",
         options: [
             "Large repositories are not supported and will cause performance issues",
-            "Argo CD supports shallow clones, sparse checkouts, and LFS for repository optimization",
+            "Repository size limits are enforced and large repositories are automatically rejected",
             "Large repositories require external caching systems and cannot be handled natively",
-            "Repository size limits are enforced and large repositories are automatically rejected"
+            "Argo CD supports shallow clones, sparse checkouts, and LFS for repository optimization"
         ],
         answer: "Argo CD supports shallow clones, sparse checkouts, and LFS for repository optimization",
         explanation: "Optimization techniques enable efficient handling of large repositories by reducing the amount of data that needs to be transferred and stored during synchronization operations."
@@ -868,8 +868,8 @@ const capaQuestions = [
         id: 71,
         question: "What is the purpose of the ignore differences feature in Argo CD?",
         options: [
-            "To ignore Git repository changes that don't affect application deployment",
             "To ignore specific fields or resources during synchronization when managed by other controllers",
+            "To ignore Git repository changes that don't affect application deployment",
             "To ignore failed deployments and continue with subsequent application updates",
             "To ignore user access permissions and allow unrestricted application management"
         ],
@@ -881,9 +881,9 @@ const capaQuestions = [
         question: "How does Argo CD handle Git webhooks?",
         options: [
             "Git webhooks are not supported and Argo CD only uses polling for change detection",
-            "Git webhooks can trigger immediate application refreshes, reducing synchronization detection time",
+            "Git webhooks require external middleware and cannot be processed directly by Argo CD",
             "Webhooks are only supported for private repositories and not public ones",
-            "Git webhooks require external middleware and cannot be processed directly by Argo CD"
+            "Git webhooks can trigger immediate application refreshes, reducing synchronization detection time"
         ],
         answer: "Git webhooks can trigger immediate application refreshes, reducing synchronization detection time",
         explanation: "Webhook integration enables faster response to changes while maintaining the pull-based GitOps model, improving deployment latency without compromising security."
@@ -893,8 +893,8 @@ const capaQuestions = [
         question: "What are the backup and disaster recovery considerations for Argo CD?",
         options: [
             "Only Git repositories need to be backed up since Argo CD is stateless",
-            "Backup considerations include the Argo CD database, Git access, and cluster credentials",
             "Disaster recovery is not needed since Argo CD can be easily reinstalled",
+            "Backup considerations include the Argo CD database, Git access, and cluster credentials",
             "Backups are only necessary for the web interface configuration and user settings"
         ],
         answer: "Backup considerations include the Argo CD database, Git access, and cluster credentials",
@@ -904,8 +904,8 @@ const capaQuestions = [
         id: 74,
         question: "How does Argo Workflows handle workflow timeout and cancellation?",
         options: [
-            "Workflows run indefinitely and cannot be terminated or cancelled once started",
             "Workflows support execution time limits, step timeouts, and graceful cancellation with cleanup",
+            "Workflows run indefinitely and cannot be terminated or cancelled once started",
             "Timeouts are only supported at the workflow level and not for individual steps",
             "Cancellation requires manual intervention and cannot be automated"
         ],
@@ -916,8 +916,8 @@ const capaQuestions = [
         id: 75,
         question: "What are the artifact repository options in Argo Workflows?",
         options: [
-            "Only local storage is supported for workflow artifacts",
             "Artifact repositories include S3-compatible storage, Google Cloud Storage, Azure Blob Storage, and local storage",
+            "Only local storage is supported for workflow artifacts",
             "Artifacts must be stored in external databases and cannot use cloud storage",
             "Artifact storage is not supported and data cannot be shared between workflow steps"
         ],
@@ -928,8 +928,8 @@ const capaQuestions = [
         id: 76,
         question: "How does Argo Workflows handle workflow parallelism and concurrency?",
         options: [
-            "All workflow steps must run sequentially and parallel execution is not supported",
             "Parallelism can be controlled at workflow, step group, and cluster levels with various limits",
+            "All workflow steps must run sequentially and parallel execution is not supported",
             "Parallelism is unlimited and cannot be controlled or restricted",
             "Parallel execution is only available in cluster workflow templates, not regular workflows"
         ],
@@ -941,9 +941,9 @@ const capaQuestions = [
         question: "What is the role of workflow service accounts in Argo Workflows?",
         options: [
             "Service accounts are only used for workflow web interface authentication",
-            "Service accounts provide the security context determining workflow resource access permissions",
+            "Service accounts are only needed for workflows that access external services",
             "Service accounts are optional and workflows run with cluster admin privileges by default",
-            "Service accounts are only needed for workflows that access external services"
+            "Service accounts provide the security context determining workflow resource access permissions"
         ],
         answer: "Service accounts provide the security context determining workflow resource access permissions",
         explanation: "Proper service account configuration follows the principle of least privilege, granting workflows only the permissions necessary for their specific tasks while maintaining security boundaries."
@@ -965,8 +965,8 @@ const capaQuestions = [
         question: "What are the scalability considerations for Argo Events?",
         options: [
             "Argo Events cannot scale beyond a single instance and does not support high-volume processing",
-            "Scalability considerations include EventBus capacity, sensor scaling, and partitioning strategies",
             "Scalability is only limited by network bandwidth and has no other constraints",
+            "Scalability considerations include EventBus capacity, sensor scaling, and partitioning strategies",
             "Scaling requires external load balancers and cannot be handled within Argo Events"
         ],
         answer: "Scalability considerations include EventBus capacity, sensor scaling, and partitioning strategies",
@@ -977,9 +977,9 @@ const capaQuestions = [
         question: "How does Argo Events integrate with external monitoring systems?",
         options: [
             "Monitoring integration is not supported and requires external tools for visibility",
-            "Integration includes Prometheus metrics, CloudWatch events, and custom metrics exporters",
+            "Monitoring integration is only available for specific EventBus implementations",
             "Only basic logging is available and advanced monitoring requires custom development",
-            "Monitoring integration is only available for specific EventBus implementations"
+            "Integration includes Prometheus metrics, CloudWatch events, and custom metrics exporters"
         ],
         answer: "Integration includes Prometheus metrics, CloudWatch events, and custom metrics exporters",
         explanation: "Monitoring integration provides visibility into event processing health, performance metrics, and operational insights necessary for maintaining reliable event-driven systems."
@@ -989,9 +989,9 @@ const capaQuestions = [
         question: "What are the progressive delivery patterns supported by Argo Rollouts?",
         options: [
             "Only canary deployments and blue-green deployments",
-            "Canary deployments, blue-green deployments, A/B testing setups, and feature flag integration",
+            "Manual deployment approval workflows",
             "Rolling updates and recreate deployments only",
-            "Manual deployment approval workflows"
+            "Canary deployments, blue-green deployments, A/B testing setups, and feature flag integration"
         ],
         answer: "Canary deployments, blue-green deployments, A/B testing setups, and feature flag integration",
         explanation: "Argo Rollouts supports multiple progressive delivery patterns including canary deployments (gradual traffic shifting), blue-green deployments (environment switching), A/B testing setups (parallel variant comparison), and feature flag integration for controlled feature releases. These patterns enable different risk management approaches and business requirements, from technical validation to business metric optimization and user experience testing."
@@ -1002,8 +1002,8 @@ const capaQuestions = [
         options: [
             "Automatically deploys to all regions simultaneously",
             "Requires manual intervention for each region",
-            "Using ApplicationSets with cluster generators, regional traffic management, and coordinated rollout strategies",
-            "Only supports single-region deployments"
+            "Only supports single-region deployments",
+            "Using ApplicationSets with cluster generators, regional traffic management, and coordinated rollout strategies"
         ],
         answer: "Using ApplicationSets with cluster generators, regional traffic management, and coordinated rollout strategies",
         explanation: "Multi-region deployments can be coordinated using ApplicationSets with cluster generators to target multiple clusters, regional traffic management for geographic distribution, and coordinated rollout strategies across regions. Regional deployment coordination requires careful planning of traffic management, data consistency, and rollout timing to maintain service availability and performance across different geographic locations."
@@ -1025,9 +1025,9 @@ const capaQuestions = [
         question: "How does Argo Rollouts integrate with GitOps workflows?",
         options: [
             "It requires a separate Git repository for rollout configurations",
-            "Using Git repositories to define rollout configurations, with Argo CD managing deployment of rollout specifications",
+            "Only supports manual configuration without Git integration",
             "It bypasses Git repositories for faster deployments",
-            "Only supports manual configuration without Git integration"
+            "Using Git repositories to define rollout configurations, with Argo CD managing deployment of rollout specifications"
         ],
         answer: "Using Git repositories to define rollout configurations, with Argo CD managing deployment of rollout specifications",
         explanation: "Argo Rollouts integrates with GitOps by using Git repositories to define rollout configurations, with Argo CD managing the deployment of rollout specifications. GitOps integration maintains declarative configuration management while enabling advanced deployment strategies, combining infrastructure-as-code with sophisticated deployment patterns. This ensures that all deployment configurations are version-controlled and auditable."
@@ -1038,8 +1038,8 @@ const capaQuestions = [
         options: [
             "All projects use the same RBAC configuration automatically",
             "RBAC is not supported in Argo projects",
-            "Cluster-level permissions for controllers, namespace-level access for applications, and external identity provider integration",
-            "Only basic authentication is supported"
+            "Only basic authentication is supported",
+            "Cluster-level permissions for controllers, namespace-level access for applications, and external identity provider integration"
         ],
         answer: "Cluster-level permissions for controllers, namespace-level access for applications, and external identity provider integration",
         explanation: "RBAC considerations across Argo projects include cluster-level permissions for controllers to manage resources, namespace-level access controls for applications to enforce boundaries, and integration with external identity providers for user authentication. Comprehensive RBAC design ensures that users and systems have appropriate permissions while maintaining security boundaries and enabling proper separation of concerns across teams and environments."
@@ -1048,8 +1048,8 @@ const capaQuestions = [
         id: 86,
         question: "How do the different Argo projects integrate with each other?",
         options: [
-            "Each project operates independently without integration",
             "Integration patterns include Argo Events triggering Argo Workflows, Argo CD deploying Argo Rollouts configurations, and workflows updating Git repositories",
+            "Each project operates independently without integration",
             "Only Argo CD can integrate with other projects",
             "Integration requires custom third-party tools"
         ],
@@ -1060,8 +1060,8 @@ const capaQuestions = [
         id: 87,
         question: "What are the common troubleshooting approaches for Argo CD sync issues?",
         options: [
-            "Restart the Argo CD server only",
             "Checking application health status, reviewing sync operation logs, validating Git repository access, and examining resource-specific error messages",
+            "Restart the Argo CD server only",
             "Delete and recreate the application",
             "Check only the Kubernetes cluster status"
         ],
@@ -1096,9 +1096,9 @@ const capaQuestions = [
         id: 90,
         question: "How does Argo Events handle event source authentication and authorization?",
         options: [
-            "No authentication is required for event sources",
-            "Only basic username/password authentication",
             "Webhook signature validation, API key management, OAuth integration, and RBAC controls for event source access",
+            "Only basic username/password authentication",
+            "No authentication is required for event sources",
             "Authentication is handled by external systems only"
         ],
         answer: "Webhook signature validation, API key management, OAuth integration, and RBAC controls for event source access",
@@ -1109,8 +1109,8 @@ const capaQuestions = [
         question: "What are the compliance and audit considerations for Argo deployments?",
         options: [
             "Compliance is not relevant for GitOps deployments",
-            "Only basic logging is required",
             "Deployment audit trails, change approval workflows, security scanning integration, and compliance reporting for regulatory requirements",
+            "Only basic logging is required",
             "Manual documentation is sufficient"
         ],
         answer: "Deployment audit trails, change approval workflows, security scanning integration, and compliance reporting for regulatory requirements",
@@ -1146,8 +1146,8 @@ const capaQuestions = [
         options: [
             "Configuration drift is not a concern in GitOps",
             "Manual checks are sufficient",
-            "Continuous monitoring of actual vs. desired state, with automated sync policies, alerting systems, and manual intervention procedures",
-            "Only automated remediation without monitoring"
+            "Only automated remediation without monitoring",
+            "Continuous monitoring of actual vs. desired state, with automated sync policies, alerting systems, and manual intervention procedures"
         ],
         answer: "Continuous monitoring of actual vs. desired state, with automated sync policies, alerting systems, and manual intervention procedures",
         explanation: "Configuration drift detection and remediation involves continuous monitoring of actual vs. desired state to identify discrepancies, automated sync policies for immediate correction, alerting systems for notification of drift events, and manual intervention procedures for complex scenarios. Drift management requires continuous monitoring, clear escalation procedures, and balanced automation to maintain system integrity while allowing for emergency interventions when automated remediation is insufficient."
@@ -1169,9 +1169,9 @@ const capaQuestions = [
         question: "How do you implement canary analysis with custom business metrics?",
         options: [
             "Canary analysis only supports technical metrics",
-            "Custom business metrics integration involves configuring metric providers, defining success criteria in analysis templates, and implementing metric collection from business monitoring systems",
+            "Only automated technical analysis is possible",
             "Business metrics are not supported in canary deployments",
-            "Only automated technical analysis is possible"
+            "Custom business metrics integration involves configuring metric providers, defining success criteria in analysis templates, and implementing metric collection from business monitoring systems"
         ],
         answer: "Custom business metrics integration involves configuring metric providers, defining success criteria in analysis templates, and implementing metric collection from business monitoring systems",
         explanation: "Implementing canary analysis with custom business metrics involves configuring metric providers to connect to business monitoring systems, defining success criteria in analysis templates that specify business thresholds, and implementing metric collection from business monitoring systems to evaluate deployment success. Business metric integration enables deployment decisions based on user experience and business outcomes rather than just technical metrics, providing more comprehensive quality assessment for production deployments."
@@ -1181,9 +1181,9 @@ const capaQuestions = [
         question: "What are the patterns for managing environment-specific configurations in GitOps?",
         options: [
             "Use the same configuration for all environments",
-            "Directory structures per environment, overlay patterns with Kustomize, Helm values per environment, and branching strategies for environment isolation",
+            "Manual configuration per environment",
             "Store configurations outside of Git",
-            "Manual configuration per environment"
+            "Directory structures per environment, overlay patterns with Kustomize, Helm values per environment, and branching strategies for environment isolation"
         ],
         answer: "Directory structures per environment, overlay patterns with Kustomize, Helm values per environment, and branching strategies for environment isolation",
         explanation: "Environment-specific configuration patterns include directory structures per environment for clear separation, overlay patterns with Kustomize for configuration inheritance, Helm values per environment for parameterized deployments, and branching strategies for environment isolation. Environment management requires balancing configuration reuse with environment-specific customization while maintaining clear inheritance relationships and avoiding configuration drift between environments."
@@ -1192,8 +1192,8 @@ const capaQuestions = [
         id: 98,
         question: "How do you implement approval workflows in GitOps deployments?",
         options: [
-            "Approval workflows are not compatible with GitOps",
             "Git-based approval processes (pull requests), external approval systems integrated with webhooks, or manual promotion patterns between environments",
+            "Approval workflows are not compatible with GitOps",
             "Only automated deployments without approvals",
             "Approval workflows require non-Git storage"
         ],
@@ -1205,9 +1205,9 @@ const capaQuestions = [
         question: "What are the observability patterns for Argo-based deployments?",
         options: [
             "Basic logging is sufficient for observability",
-            "Deployment tracing across the pipeline, metric correlation between deployment events and system performance, and comprehensive logging of all automation activities",
+            "Manual observation of deployment status",
             "Only cluster-level monitoring is needed",
-            "Manual observation of deployment status"
+            "Deployment tracing across the pipeline, metric correlation between deployment events and system performance, and comprehensive logging of all automation activities"
         ],
         answer: "Deployment tracing across the pipeline, metric correlation between deployment events and system performance, and comprehensive logging of all automation activities",
         explanation: "Observability patterns for Argo-based deployments include deployment tracing across the entire pipeline to track changes from commit to production, metric correlation between deployment events and system performance to understand impact, and comprehensive logging of all automation activities for audit and troubleshooting. Effective observability enables rapid troubleshooting, performance optimization, and understanding of deployment impact across the entire application lifecycle and infrastructure."
@@ -1217,8 +1217,8 @@ const capaQuestions = [
         question: "How do you design resilient automation pipelines using the Argo ecosystem?",
         options: [
             "Resilience is not important for automation pipelines",
-            "Single point of failure design is acceptable",
             "Failure isolation between components, retry mechanisms, circuit breaker patterns, graceful degradation strategies, and comprehensive monitoring with automated recovery procedures",
+            "Single point of failure design is acceptable",
             "Manual intervention for all failures"
         ],
         answer: "Failure isolation between components, retry mechanisms, circuit breaker patterns, graceful degradation strategies, and comprehensive monitoring with automated recovery procedures",
@@ -1226,108 +1226,17 @@ const capaQuestions = [
     }
 ];
 
-// Complete answer key mapping question ID to correct letter
 const capaCorrectAnswers = {
-    1: 'B',
-    2: 'C',
-    3: 'B',
-    4: 'C',
-    5: 'C',
-    6: 'B',
-    7: 'C',
-    8: 'B',
-    9: 'B',
-    10: 'B',
-    11: 'B',
-    12: 'B',
-    13: 'B',
-    14: 'B',
-    15: 'B',
-    16: 'B',
-    17: 'B',
-    18: 'B',
-    19: 'B',
-    20: 'B',
-    21: 'B',
-    22: 'B',
-    23: 'B',
-    24: 'A',
-    25: 'B',
-    26: 'B',
-    27: 'B',
-    28: 'B',
-    29: 'B',
-    30: 'B',
-    31: 'B',
-    32: 'B',
-    33: 'C',
-    34: 'B',
-    35: 'B',
-    36: 'B',
-    37: 'B',
-    38: 'B',
-    39: 'B',
-    40: 'B',
-    41: 'B',
-    42: 'B',
-    43: 'B',
-    44: 'B',
-    45: 'B',
-    46: 'B',
-    47: 'B',
-    48: 'B',
-    49: 'B',
-    50: 'B',
-    51: 'B',
-    52: 'B',
-    53: 'B',
-    54: 'B',
-    55: 'B',
-    56: 'B',
-    57: 'B',
-    58: 'B',
-    59: 'B',
-    60: 'B',
-    61: 'B',
-    62: 'B',
-    63: 'B',
-    64: 'B',
-    65: 'B',
-    66: 'B',
-    67: 'B',
-    68: 'B',
-    69: 'B',
-    70: 'B',
-    71: 'B',
-    72: 'B',
-    73: 'B',
-    74: 'B',
-    75: 'B',
-    76: 'B',
-    77: 'B',
-    78: 'B',
-    79: 'B',
-    80: 'B',
-    81: 'B',
-    82: 'C',
-    83: 'B',
-    84: 'B',
-    85: 'C',
-    86: 'B',
-    87: 'B',
-    88: 'C',
-    89: 'B',
-    90: 'C',
-    91: 'C',
-    92: 'C',
-    93: 'B',
-    94: 'C',
-    95: 'C',
-    96: 'B',
-    97: 'B',
-    98: 'B',
-    99: 'B',
-    100: 'C'
+    1: 'C',    2: 'C',    3: 'C',    4: 'B',    5: 'A',    6: 'D',    7: 'C',    8: 'B',    9: 'D',    10: 'C',
+    11: 'B',    12: 'A',    13: 'C',    14: 'C',    15: 'B',    16: 'C',    17: 'D',    18: 'B',    19: 'A',    20: 'B',
+    21: 'D',    22: 'B',    23: 'C',    24: 'D',    25: 'A',    26: 'D',    27: 'A',    28: 'B',    29: 'A',    30: 'A',
+    31: 'B',    32: 'B',    33: 'A',    34: 'C',    35: 'B',    36: 'D',    37: 'B',    38: 'B',    39: 'C',    40: 'C',
+    41: 'C',    42: 'B',    43: 'A',    44: 'C',    45: 'D',    46: 'A',    47: 'D',    48: 'D',    49: 'B',    50: 'C',
+    51: 'A',    52: 'B',    53: 'B',    54: 'C',    55: 'A',    56: 'A',    57: 'A',    58: 'B',    59: 'C',    60: 'C',
+    61: 'C',    62: 'D',    63: 'C',    64: 'A',    65: 'A',    66: 'D',    67: 'D',    68: 'B',    69: 'A',    70: 'D',
+    71: 'A',    72: 'D',    73: 'C',    74: 'A',    75: 'A',    76: 'A',    77: 'D',    78: 'B',    79: 'C',    80: 'D',
+    81: 'D',    82: 'D',    83: 'B',    84: 'D',    85: 'D',    86: 'A',    87: 'A',    88: 'C',    89: 'B',    90: 'A',
+    91: 'B',    92: 'C',    93: 'B',    94: 'D',    95: 'C',    96: 'D',    97: 'D',    98: 'A',    99: 'D',    100: 'B'
 };
 
 // Export for use in other files

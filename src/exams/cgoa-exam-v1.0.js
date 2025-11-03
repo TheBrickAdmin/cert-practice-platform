@@ -29,8 +29,8 @@ const cgoaQuestions = [
         id: 1,
         question: "What is the primary principle of GitOps?",
         options: [
-            "Infrastructure managed through manual deployment scripts",
             "Declarative infrastructure and applications stored in Git",
+            "Infrastructure managed through manual deployment scripts",
             "Using Kubernetes for all deployments",
             "Automated testing in CI/CD pipelines"
         ],
@@ -43,8 +43,8 @@ const cgoaQuestions = [
         options: [
             "Code → Build → Test → Deploy → Monitor",
             "Git Push → CI Build → Manual Approval → Deploy",
-            "Git Commit → Agent Pulls → Reconcile → Deploy",
-            "Developer Push → Webhook → Immediate Deploy"
+            "Developer Push → Webhook → Immediate Deploy",
+            "Git Commit → Agent Pulls → Reconcile → Deploy"
         ],
         answer: "Git Commit → Agent Pulls → Reconcile → Deploy",
         explanation: "GitOps follows a pull-based model where a GitOps agent continuously monitors Git repositories and pulls changes to reconcile the actual state with the desired state declared in Git."
@@ -65,10 +65,10 @@ const cgoaQuestions = [
         id: 4,
         question: "Which Git workflow is most commonly used in GitOps?",
         options: [
-            "Feature branch workflow with merge commits",
+            "Pull request workflow with environment promotion",
             "GitFlow with release branches",
             "Trunk-based development with direct commits to main",
-            "Pull request workflow with environment promotion"
+            "Feature branch workflow with merge commits"
         ],
         answer: "Pull request workflow with environment promotion",
         explanation: "GitOps typically uses pull request workflows to manage changes and promote configurations through different environments (dev → staging → production) using separate branches or repositories."
@@ -78,9 +78,9 @@ const cgoaQuestions = [
         question: "What is the main advantage of GitOps over traditional CI/CD?",
         options: [
             "Faster build times",
-            "Improved security through Git-based access control",
+            "Simpler application architecture",
             "Better test coverage",
-            "Simpler application architecture"
+            "Improved security through Git-based access control"
         ],
         answer: "Improved security through Git-based access control",
         explanation: "GitOps improves security by using Git's access control mechanisms, eliminating the need for CI/CD systems to have direct access to production environments, and providing a complete audit trail through Git history."
@@ -89,9 +89,9 @@ const cgoaQuestions = [
         id: 6,
         question: "In GitOps, what is meant by 'observability'?",
         options: [
-            "The ability to manually inspect system logs",
-            "Having dashboards to view application metrics",
             "The system's capability to provide insights into its internal state",
+            "Having dashboards to view application metrics",
+            "The ability to manually inspect system logs",
             "Monitoring CPU and memory usage"
         ],
         answer: "The system's capability to provide insights into its internal state",
@@ -114,9 +114,9 @@ const cgoaQuestions = [
         question: "Which principle ensures that GitOps systems can recover from failures?",
         options: [
             "Automated rollbacks",
-            "Self-healing and convergence",
+            "Backup and restore procedures",
             "Manual intervention protocols",
-            "Backup and restore procedures"
+            "Self-healing and convergence"
         ],
         answer: "Self-healing and convergence",
         explanation: "GitOps systems continuously reconcile the actual state with the desired state in Git, automatically correcting drift and recovering from failures without manual intervention."
@@ -126,8 +126,8 @@ const cgoaQuestions = [
         question: "What role does immutability play in GitOps?",
         options: [
             "Git repositories cannot be modified once created",
-            "Infrastructure components are replaced rather than modified in-place",
             "Application code cannot be changed after deployment",
+            "Infrastructure components are replaced rather than modified in-place",
             "Configuration files are read-only"
         ],
         answer: "Infrastructure components are replaced rather than modified in-place",
@@ -137,10 +137,10 @@ const cgoaQuestions = [
         id: 10,
         question: "Which of the following is NOT a core GitOps principle?",
         options: [
-            "Declarative configuration",
+            "Manually approved changes",
             "Version controlled and immutable",
             "Automatically deployed",
-            "Manually approved changes"
+            "Declarative configuration"
         ],
         answer: "Manually approved changes",
         explanation: "While approval workflows can be part of GitOps, manual approval is not a core principle. The core principles focus on declarative configuration, version control, automatic deployment, and continuous reconciliation."
@@ -150,8 +150,8 @@ const cgoaQuestions = [
         question: "What Git feature is essential for GitOps auditability?",
         options: [
             "Git hooks",
-            "Git submodules",
             "Commit history and blame",
+            "Git submodules",
             "Git LFS (Large File Storage)"
         ],
         answer: "Commit history and blame",
@@ -162,8 +162,8 @@ const cgoaQuestions = [
         question: "How should secrets be handled in a GitOps repository?",
         options: [
             "Store them directly in Git for transparency",
-            "Use encrypted secrets with tools like Sealed Secrets or External Secrets",
             "Keep them in environment variables only",
+            "Use encrypted secrets with tools like Sealed Secrets or External Secrets",
             "Store them in a separate database"
         ],
         answer: "Use encrypted secrets with tools like Sealed Secrets or External Secrets",
@@ -174,9 +174,9 @@ const cgoaQuestions = [
         question: "What is the recommended Git repository structure for GitOps?",
         options: [
             "Single repository containing both application code and configuration",
-            "Separate repositories for application code and deployment configurations",
+            "All configuration in the main application repository",
             "One repository per microservice including everything",
-            "All configuration in the main application repository"
+            "Separate repositories for application code and deployment configurations"
         ],
         answer: "Separate repositories for application code and deployment configurations",
         explanation: "GitOps best practices recommend separating application source code from deployment configurations to enable different access controls, release cycles, and responsibilities."
@@ -185,8 +185,8 @@ const cgoaQuestions = [
         id: 14,
         question: "Which Git branching strategy aligns best with GitOps environment promotion?",
         options: [
-            "All environments use the main branch",
             "Environment-specific branches (dev, staging, prod)",
+            "All environments use the main branch",
             "Feature branches for each deployment",
             "Tags for environment releases"
         ],
@@ -198,9 +198,9 @@ const cgoaQuestions = [
         question: "What is the purpose of Git signed commits in GitOps?",
         options: [
             "To compress commit data",
-            "To verify commit authenticity and integrity",
+            "To improve Git performance",
             "To automatically deploy changes",
-            "To improve Git performance"
+            "To verify commit authenticity and integrity"
         ],
         answer: "To verify commit authenticity and integrity",
         explanation: "Git signed commits use GPG signatures to verify that commits come from trusted sources and haven't been tampered with, adding a security layer to the GitOps process."
@@ -209,8 +209,8 @@ const cgoaQuestions = [
         id: 16,
         question: "How should large binary files be handled in GitOps repositories?",
         options: [
-            "Store them directly in Git",
             "Use Git LFS or external artifact storage",
+            "Store them directly in Git",
             "Compress them before committing",
             "Split them into smaller files"
         ],
@@ -222,9 +222,9 @@ const cgoaQuestions = [
         question: "What is the recommended approach for handling environment-specific configurations?",
         options: [
             "Hard-code values for each environment",
-            "Use templating tools like Helm or Kustomize",
+            "Use only environment variables",
             "Create separate repositories for each environment",
-            "Use only environment variables"
+            "Use templating tools like Helm or Kustomize"
         ],
         answer: "Use templating tools like Helm or Kustomize",
         explanation: "Templating tools like Helm, Kustomize, or Jsonnet allow you to maintain a base configuration with environment-specific overlays, reducing duplication while maintaining clarity."
@@ -233,8 +233,8 @@ const cgoaQuestions = [
         id: 18,
         question: "Which Git operation should GitOps agents primarily use?",
         options: [
-            "git push",
             "git pull/fetch",
+            "git push",
             "git merge",
             "git rebase"
         ],
@@ -270,8 +270,8 @@ const cgoaQuestions = [
         question: "Which artifact should CI pipelines produce for GitOps?",
         options: [
             "Deployment scripts",
-            "Container images and manifests",
             "Infrastructure code",
+            "Container images and manifests",
             "Test reports"
         ],
         answer: "Container images and manifests",
@@ -294,8 +294,8 @@ const cgoaQuestions = [
         question: "What is the role of webhooks in GitOps?",
         options: [
             "To push changes to Git repositories",
-            "To notify GitOps agents of repository changes",
             "To automatically merge pull requests",
+            "To notify GitOps agents of repository changes",
             "To backup Git repositories"
         ],
         answer: "To notify GitOps agents of repository changes",
@@ -342,9 +342,9 @@ const cgoaQuestions = [
         question: "Which CI/CD pattern is most compatible with GitOps?",
         options: [
             "Push-based deployment from CI",
-            "Manual deployment gates",
+            "Pull-based deployment with Git polling",
             "Event-driven deployment triggers",
-            "Pull-based deployment with Git polling"
+            "Manual deployment gates"
         ],
         answer: "Pull-based deployment with Git polling",
         explanation: "GitOps uses a pull-based model where deployment agents continuously monitor Git repositories and pull changes, rather than CI systems pushing deployments directly."
@@ -354,9 +354,9 @@ const cgoaQuestions = [
         question: "Which tool is specifically designed for GitOps?",
         options: [
             "Jenkins",
-            "ArgoCD",
+            "Docker",
             "GitLab CI",
-            "Docker"
+            "ArgoCD"
         ],
         answer: "ArgoCD",
         explanation: "ArgoCD is a declarative, GitOps continuous delivery tool specifically designed for Kubernetes that implements GitOps principles and patterns."
@@ -365,8 +365,8 @@ const cgoaQuestions = [
         id: 29,
         question: "What is Flux in the context of GitOps?",
         options: [
-            "A Git hosting platform",
             "A GitOps operator for Kubernetes",
+            "A Git hosting platform",
             "A container registry",
             "A monitoring tool"
         ],
@@ -414,9 +414,9 @@ const cgoaQuestions = [
         question: "What is Kustomize used for in GitOps?",
         options: [
             "Git repository management",
-            "Kubernetes YAML customization and overlays",
+            "Secret encryption",
             "Container image building",
-            "Secret encryption"
+            "Kubernetes YAML customization and overlays"
         ],
         answer: "Kubernetes YAML customization and overlays",
         explanation: "Kustomize allows customization of Kubernetes YAML configurations through overlays and patches, enabling environment-specific configurations without duplicating base manifests."
@@ -426,8 +426,8 @@ const cgoaQuestions = [
         question: "Which feature is essential for GitOps tools?",
         options: [
             "Built-in CI capabilities",
-            "Drift detection and auto-sync",
             "Container image scanning",
+            "Drift detection and auto-sync",
             "Load balancing"
         ],
         answer: "Drift detection and auto-sync",
@@ -438,8 +438,8 @@ const cgoaQuestions = [
         question: "What is the purpose of ArgoCD's Application CRD?",
         options: [
             "To define container specifications",
-            "To declare desired application state and sync policies",
             "To configure network policies",
+            "To declare desired application state and sync policies",
             "To manage persistent volumes"
         ],
         answer: "To declare desired application state and sync policies",
@@ -462,9 +462,9 @@ const cgoaQuestions = [
         question: "What security principle does GitOps enforce?",
         options: [
             "Shared access to production systems",
-            "Principle of least privilege through Git access controls",
+            "Unlimited admin access for developers",
             "Direct database access for deployments",
-            "Unlimited admin access for developers"
+            "Principle of least privilege through Git access controls"
         ],
         answer: "Principle of least privilege through Git access controls",
         explanation: "GitOps enforces security by using Git's access control mechanisms, ensuring users only have the minimum necessary permissions and eliminating direct production access."
@@ -473,8 +473,8 @@ const cgoaQuestions = [
         id: 38,
         question: "How does GitOps improve compliance and auditing?",
         options: [
-            "By requiring manual approval for all changes",
             "Through complete Git commit history and traceability",
+            "By requiring manual approval for all changes",
             "By storing logs in external systems only",
             "Through encrypted deployment processes"
         ],
@@ -497,10 +497,10 @@ const cgoaQuestions = [
         id: 40,
         question: "Which tool can enforce policies in GitOps workflows?",
         options: [
-            "Open Policy Agent (OPA)",
+            "Git",
             "Docker",
             "kubectl",
-            "Git"
+            "Open Policy Agent (OPA)"
         ],
         answer: "Open Policy Agent (OPA)",
         explanation: "Open Policy Agent (OPA) can enforce policies in GitOps by evaluating policies against configurations before they're applied, ensuring compliance and security requirements are met."
@@ -509,9 +509,9 @@ const cgoaQuestions = [
         id: 41,
         question: "How should RBAC (Role-Based Access Control) be implemented in GitOps?",
         options: [
-            "Only at the Git repository level",
-            "Only at the Kubernetes cluster level",
             "At both Git repository and cluster levels",
+            "Only at the Kubernetes cluster level",
+            "Only at the Git repository level",
             "Through application-level permissions only"
         ],
         answer: "At both Git repository and cluster levels",
@@ -534,9 +534,9 @@ const cgoaQuestions = [
         question: "Which security practice should be enforced in GitOps repositories?",
         options: [
             "Public read access for transparency",
-            "Signed commits and branch protection",
+            "Disabling authentication",
             "Storing all secrets in plain text",
-            "Disabling authentication"
+            "Signed commits and branch protection"
         ],
         answer: "Signed commits and branch protection",
         explanation: "GitOps repositories should enforce signed commits for authenticity, branch protection rules to prevent unauthorized changes, and proper access controls to maintain security."
@@ -546,8 +546,8 @@ const cgoaQuestions = [
         question: "What should be monitored in a GitOps system?",
         options: [
             "Only application metrics",
-            "Git repository activity, sync status, and drift detection",
             "Only infrastructure metrics",
+            "Git repository activity, sync status, and drift detection",
             "Only error logs"
         ],
         answer: "Git repository activity, sync status, and drift detection",
@@ -558,8 +558,8 @@ const cgoaQuestions = [
         question: "Which metric indicates GitOps system health?",
         options: [
             "Code coverage percentage",
-            "Sync success rate and drift frequency",
             "Number of Git commits",
+            "Sync success rate and drift frequency",
             "Container image size"
         ],
         answer: "Sync success rate and drift frequency",
@@ -569,8 +569,8 @@ const cgoaQuestions = [
         id: 46,
         question: "What is 'observability' in GitOps beyond basic monitoring?",
         options: [
-            "Having more dashboards",
             "Understanding system behavior through traces, metrics, and logs",
+            "Having more dashboards",
             "Monitoring only CPU and memory",
             "Setting up more alerts"
         ],
@@ -581,8 +581,8 @@ const cgoaQuestions = [
         id: 47,
         question: "Which tool can provide GitOps-specific observability?",
         options: [
-            "Basic system monitoring tools only",
             "Prometheus with GitOps-aware metrics",
+            "Basic system monitoring tools only",
             "File-based logging only",
             "Manual status checks"
         ],
@@ -594,9 +594,9 @@ const cgoaQuestions = [
         question: "What should be included in GitOps alerting?",
         options: [
             "Only infrastructure failures",
-            "Sync failures, drift detection, and policy violations",
+            "Only performance issues",
             "Only application errors",
-            "Only performance issues"
+            "Sync failures, drift detection, and policy violations"
         ],
         answer: "Sync failures, drift detection, and policy violations",
         explanation: "GitOps alerting should cover sync failures (when desired state can't be achieved), drift detection (when actual state diverges), and policy violations (when changes don't comply with rules)."
@@ -606,8 +606,8 @@ const cgoaQuestions = [
         question: "How can GitOps systems provide deployment visibility?",
         options: [
             "Through manual status reports",
-            "Via dashboards showing sync status and deployment history",
             "Only through log files",
+            "Via dashboards showing sync status and deployment history",
             "Through email notifications only"
         ],
         answer: "Via dashboards showing sync status and deployment history",
@@ -628,11 +628,11 @@ const cgoaQuestions = [
 ];
 
 const cgoaCorrectAnswers = {
-    1: 'B', 2: 'C', 3: 'B', 4: 'D', 5: 'B', 6: 'C', 7: 'B', 8: 'B', 9: 'B', 10: 'D',
-    11: 'C', 12: 'B', 13: 'B', 14: 'B', 15: 'B', 16: 'B', 17: 'B', 18: 'B', 19: 'B', 20: 'C',
-    21: 'B', 22: 'B', 23: 'B', 24: 'B', 25: 'B', 26: 'B', 27: 'D', 28: 'B', 29: 'B', 30: 'C',
-    31: 'B', 32: 'A', 33: 'B', 34: 'B', 35: 'B', 36: 'C', 37: 'B', 38: 'B', 39: 'B', 40: 'A',
-    41: 'C', 42: 'B', 43: 'B', 44: 'B', 45: 'B', 46: 'B', 47: 'B', 48: 'B', 49: 'B', 50: 'B'
+    1: 'A',    2: 'D',    3: 'B',    4: 'A',    5: 'D',    6: 'A',    7: 'B',    8: 'D',    9: 'C',    10: 'A',
+    11: 'B',    12: 'C',    13: 'D',    14: 'A',    15: 'D',    16: 'A',    17: 'D',    18: 'A',    19: 'B',    20: 'C',
+    21: 'C',    22: 'B',    23: 'C',    24: 'B',    25: 'B',    26: 'B',    27: 'B',    28: 'D',    29: 'A',    30: 'C',
+    31: 'B',    32: 'A',    33: 'D',    34: 'C',    35: 'C',    36: 'C',    37: 'D',    38: 'A',    39: 'B',    40: 'D',
+    41: 'A',    42: 'B',    43: 'D',    44: 'C',    45: 'C',    46: 'A',    47: 'A',    48: 'D',    49: 'C',    50: 'B'
 };
 
 // Export for use in other files
