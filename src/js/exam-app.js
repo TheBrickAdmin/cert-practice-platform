@@ -277,7 +277,12 @@ class ExamPracticeApp {
                             <div class="exam-topics">
                                 <strong>📚 Topics:</strong> ${exam.topics.join(', ')}
                             </div>
-                            ${hasProgress ? '<div class="progress-indicator">📚 In Progress</div>' : ''}
+                            ${hasProgress ? `
+                                <div class="progress-controls">
+                                    <div class="progress-indicator">📚 In Progress</div>
+                                    <button class="reset-progress-btn" onclick="event.stopPropagation(); app.resetExamProgress('${exam.id}')" title="Reset progress for this exam">🗑️</button>
+                                </div>
+                            ` : ''}
                         </div>`;
                     }).join('')}
                 </div>
@@ -743,6 +748,23 @@ src/
                 </div>
             </div>
         `;
+    }
+
+    // Reset progress for a specific exam with confirmation
+    // Reset progress for a specific exam (immediate, no confirmation)
+    resetExamProgress(examId) {
+        const progressInfo = this.getProgressSummary(examId);
+        
+        // If no progress exists, do nothing silently
+        if (!progressInfo) {
+            return;
+        }
+        
+        // Clear progress immediately without confirmation
+        this.clearProgress(examId);
+        
+        // Refresh the exam selector to update the UI
+        this.showExamSelector();
     }
 
     // Clear progress with confirmation
