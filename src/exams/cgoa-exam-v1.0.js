@@ -6,9 +6,8 @@ const cgoaExamInfo = {
     name: 'CGOA - Certified GitOps Associate',
     description: 'Practice exam for the Certified GitOps Associate certification covering GitOps principles, practices, tools, and implementation strategies.',
     version: '1.0',
-    totalQuestions: 60,
+    totalQuestions: 50,
     passingScore: 75,
-    timeLimit: 90, // minutes
     topics: ['GitOps Fundamentals', 'Git & Version Control', 'CI/CD Integration', 'GitOps Tools', 'Security & Compliance', 'Monitoring & Observability'],
     difficulty: 'Intermediate',
     lastUpdated: '2025-11-02'

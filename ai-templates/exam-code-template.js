@@ -8,7 +8,6 @@ const [acronym]ExamInfo = {
     description: '[BRIEF_DESCRIPTION]',
     totalQuestions: [NUMBER],
     passingScore: [PERCENTAGE],
-    timeLimit: [MINUTES],
     topics: [
         '[TOPIC_1]',
         '[TOPIC_2]',

@@ -6,9 +6,8 @@ const capaExamInfo = {
     name: 'CAPA - Certified Argo Project Associate',
     description: 'Practice exam for the Certified Argo Project Associate certification covering GitOps, Argo CD, Argo Workflows, Argo Events, and Argo Rollouts.',
     version: '1.0',
-    totalQuestions: 60,
+    totalQuestions: 100,
     passingScore: 70,
-    timeLimit: 90, // minutes
     topics: ['Argo CD Fundamentals', 'Argo CD Advanced', 'Argo Workflows', 'Argo Events', 'Argo Rollouts', 'Integration & Advanced'],
     lastUpdated: '2025-11-02'
 };

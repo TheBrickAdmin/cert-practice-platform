@@ -266,8 +266,7 @@ class ExamPracticeApp {
                                 </div>
                             ` : ''}
                             <div class="exam-meta">
-                                <strong>📊 ${exam.totalQuestions} questions</strong> • 
-                                <strong>⏱️ ${exam.timeLimit} minutes</strong> • 
+                                <strong>📊 ${exam.totalQuestions} practice questions</strong> • 
                                 <strong>🎯 ${exam.passingScore}% to pass</strong>
                             </div>
                             <div class="exam-meta">
@@ -510,7 +509,7 @@ class ExamPracticeApp {
                         <li><strong>Progress Tracking:</strong> Your score and topic-specific performance update automatically</li>
                         <li><strong>Review Mode:</strong> Use the buttons below to show/hide all answers or generate a comprehensive summary report</li>
                         <li><strong>Target Score:</strong> Aim for ${this.currentExam.passingScore}%+ to pass the actual certification exam</li>
-                        <li><strong>Time Limit:</strong> Actual exam has ${this.currentExam.timeLimit} minutes for ${this.currentExam.totalQuestions} questions</li>
+                        <li><strong>Practice Mode:</strong> This platform contains ${this.currentExam.totalQuestions} practice questions with no time limit</li>
                     </ul>
                 </div>
             </div>

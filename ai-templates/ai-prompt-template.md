@@ -12,7 +12,6 @@ I need you to create a comprehensive practice exam for the [CERTIFICATION_NAME] 
 - **Certification Acronym**: [ACRONYM] 
 - **Total Questions**: [NUMBER] (typical range: 50-100)
 - **Passing Score**: [PERCENTAGE]% 
-- **Time Limit**: [MINUTES] minutes
 - **Difficulty Level**: [Beginner/Intermediate/Advanced]
 
 ### Topic Areas and Distribution:
