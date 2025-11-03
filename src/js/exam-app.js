@@ -12,10 +12,141 @@ class ExamPracticeApp {
         this.flaggedQuestions = new Set(); // Track flagged questions
         this.currentFilter = 'all'; // 'all', 'flagged', 'unanswered'
         this.availableExams = [];
+        this.storageKey = 'cert-practice-history'; // Key for localStorage
+    }
+
+    // Save exam progress to localStorage (per exam)
+    saveProgress() {
+        if (!this.currentExam) {
+            console.warn('No current exam to save progress for');
+            return;
+        }
+        
+        try {
+            // Get existing progress data for all exams
+            const allProgressData = this.getAllProgressData();
+            
+            // Update progress for current exam
+            const examProgressData = {
+                currentExam: this.currentExam,
+                currentPage: this.currentPage,
+                userAnswers: this.userAnswers,
+                flaggedQuestions: Array.from(this.flaggedQuestions), // Convert Set to Array for storage
+                missedQuestions: this.missedQuestions,
+                currentFilter: this.currentFilter,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Store under the specific exam ID
+            allProgressData[this.currentExam.id] = examProgressData;
+            
+            localStorage.setItem(this.storageKey, JSON.stringify(allProgressData));
+            console.log(`Progress saved for exam: ${this.currentExam.id}`);
+        } catch (error) {
+            console.warn('Failed to save progress to localStorage:', error);
+        }
+    }
+
+    // Load exam progress from localStorage (per exam)
+    loadProgress(examId = null) {
+        try {
+            const allProgressData = this.getAllProgressData();
+            
+            if (!examId && this.currentExam) {
+                examId = this.currentExam.id;
+            }
+            
+            if (examId && allProgressData[examId]) {
+                const progressData = allProgressData[examId];
+                console.log(`Loading saved progress for exam: ${examId}`, progressData);
+
+                // Restore progress data for this specific exam
+                this.currentPage = progressData.currentPage || 1;
+                this.userAnswers = progressData.userAnswers || {};
+                this.flaggedQuestions = new Set(progressData.flaggedQuestions || []); // Convert Array back to Set
+                this.missedQuestions = progressData.missedQuestions || [];
+                this.currentFilter = progressData.currentFilter || 'all';
+
+                // Return the saved exam info for potential restoration
+                return progressData.currentExam;
+            } else {
+                console.log(`No saved progress found for exam: ${examId || 'current'}`);
+                return false;
+            }
+        } catch (error) {
+            console.warn('Failed to load progress from localStorage:', error);
+            return false;
+        }
+    }
+
+    // Get all progress data for all exams
+    getAllProgressData() {
+        try {
+            const savedData = localStorage.getItem(this.storageKey);
+            return savedData ? JSON.parse(savedData) : {};
+        } catch (error) {
+            console.warn('Failed to parse progress data:', error);
+            return {};
+        }
+    }
+
+    // Clear saved progress (for specific exam or all exams)
+    clearProgress(examId = null) {
+        try {
+            if (examId) {
+                // Clear progress for specific exam
+                const allProgressData = this.getAllProgressData();
+                delete allProgressData[examId];
+                localStorage.setItem(this.storageKey, JSON.stringify(allProgressData));
+                console.log(`Progress cleared for exam: ${examId}`);
+            } else {
+                // Clear all progress
+                localStorage.removeItem(this.storageKey);
+                console.log('All progress cleared from localStorage');
+            }
+        } catch (error) {
+            console.warn('Failed to clear progress from localStorage:', error);
+        }
+    }
+
+    // Check if there's saved progress for a specific exam
+    hasSavedProgress(examId) {
+        try {
+            const allProgressData = this.getAllProgressData();
+            return allProgressData.hasOwnProperty(examId);
+        } catch (error) {
+            return false;
+        }
+    }
+
+    // Get progress summary for a specific exam
+    getProgressSummary(examId) {
+        try {
+            const allProgressData = this.getAllProgressData();
+            const progressData = allProgressData[examId];
+            
+            if (!progressData) {
+                return null;
+            }
+            
+            return {
+                answeredCount: Object.keys(progressData.userAnswers || {}).length,
+                flaggedCount: (progressData.flaggedQuestions || []).length,
+                currentPage: progressData.currentPage || 1
+            };
+        } catch (error) {
+            return null;
+        }
     }
 
     async init() {
         await this.loadAvailableExams();
+        
+        // Load any existing progress data into memory
+        this.loadProgress();
+        
+        // Always show the exam selector with visual progress indicators
+        // Users can see which exams have progress and click to continue
         this.showExamSelector();
     }
 
@@ -60,18 +191,80 @@ class ExamPracticeApp {
         }
     }
 
+    showProgressRestoreOption(savedExam) {
+        const container = document.getElementById('mainContainer');
+        const answeredCount = Object.keys(this.userAnswers).length;
+        const flaggedCount = this.flaggedQuestions.size;
+        
+        container.innerHTML = `
+            <div class="exam-selector">
+                <h1>Cert Practice Platform</h1>
+                
+                <div class="progress-restore-notice" style="background: #e3f2fd; border: 1px solid #2196f3; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                    <h3 style="color: #1976d2; margin-top: 0;">🔄 Previous Session Found</h3>
+                    <p>You have a saved session for <strong>${savedExam.name}</strong>:</p>
+                    <ul style="text-align: left; display: inline-block;">
+                        <li><strong>${answeredCount}</strong> questions answered</li>
+                        <li><strong>${flaggedCount}</strong> questions flagged</li>
+                        <li>Last page: <strong>${this.currentPage}</strong></li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button onclick="app.restoreExamSession('${savedExam.id}')" class="btn btn-primary" style="margin-right: 10px;">
+                            📚 Continue Previous Session
+                        </button>
+                        <button onclick="app.startFreshSession()" class="btn btn-secondary">
+                            🆕 Start Fresh
+                        </button>
+                    </div>
+                </div>
+                
+                <p style="color: #666; font-style: italic;">Or select a different exam below:</p>
+                
+                <div class="available-exams">
+                    ${this.availableExams.map(exam => `
+                        <div class="exam-card">
+                            <h3>${exam.name}</h3>
+                            <p>${exam.description}</p>
+                            <div class="exam-details">
+                                <span class="question-count">${exam.questionCount} questions</span>
+                                <span class="topics">${exam.topics.join(', ')}</span>
+                            </div>
+                            <button onclick="app.clearAndSelectExam('${exam.id}')" class="btn btn-primary">
+                                Start Practice
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
     showExamSelector() {
         const container = document.getElementById('mainContainer');
         container.innerHTML = `
             <div class="exam-selector">
-                <h1>🤖 test.PILOT: Certification Exam Practice</h1>
-                <p>Select an exam to start practicing. All exams feature question flagging and progress tracking:</p>
+                <h1>🎓 Cert Practice Platform</h1>
+                <p>Select an exam to start or continue practicing. Your progress is automatically saved and will continue where you left off:</p>
                 
                 <div class="exam-list">
-                    ${this.availableExams.map(exam => `
-                        <div class="exam-card" onclick="app.selectExam('${exam.id}')">
+                    ${this.availableExams.map(exam => {
+                        const hasProgress = this.hasSavedProgress(exam.id);
+                        const progressInfo = hasProgress ? this.getProgressSummary(exam.id) : null;
+                        
+                        return `
+                        <div class="exam-card ${hasProgress ? 'has-progress' : ''}" onclick="app.smartSelectExam('${exam.id}')">
                             <h3>${exam.name}</h3>
                             <p>${exam.description}</p>
+                            ${hasProgress ? `
+                                <div class="progress-summary">
+                                    <small>
+                                        <strong>${progressInfo.answeredCount}</strong> answered • 
+                                        <strong>${progressInfo.flaggedCount}</strong> flagged • 
+                                        Page <strong>${progressInfo.currentPage}</strong>
+                                    </small>
+                                </div>
+                            ` : ''}
                             <div class="exam-meta">
                                 <strong>📊 ${exam.totalQuestions} questions</strong> • 
                                 <strong>⏱️ ${exam.timeLimit} minutes</strong> • 
@@ -84,8 +277,9 @@ class ExamPracticeApp {
                             <div class="exam-topics">
                                 <strong>📚 Topics:</strong> ${exam.topics.join(', ')}
                             </div>
-                        </div>
-                    `).join('')}
+                            ${hasProgress ? '<div class="progress-indicator">📚 In Progress</div>' : ''}
+                        </div>`;
+                    }).join('')}
                 </div>
                 
                 ${this.availableExams.length === 0 ? 
@@ -105,6 +299,57 @@ class ExamPracticeApp {
                 </div>
             </div>
         `;
+    }
+
+    // Restore previous exam session
+    async restoreExamSession(examId) {
+        const exam = this.availableExams.find(e => e.id === examId);
+        if (!exam) {
+            alert('Exam not found!');
+            return;
+        }
+
+        try {
+            // Load the full exam data
+            await this.loadFullExamData(exam.path);
+            this.currentExam = exam;
+            
+            // Load progress for this specific exam
+            this.loadProgress(examId);
+            
+            // Save that we're actively in this exam
+            this.saveProgress();
+            this.showExamInterface();
+        } catch (error) {
+            console.error('Failed to restore exam session:', error);
+            alert('Failed to restore exam session. Starting fresh.');
+            this.clearProgress(examId);
+            this.selectExam(examId);
+        }
+    }
+
+    // Clear progress and select exam (fresh start)
+    clearAndSelectExam(examId) {
+        this.clearProgress(examId);
+        this.selectExam(examId);
+    }
+
+    // Start fresh session (clear progress and show exam selector)
+    startFreshSession() {
+        this.clearProgress();
+        this.showExamSelector();
+    }
+
+    // Smart exam selection that preserves progress if available
+    async smartSelectExam(examId) {
+        // Check if there's saved progress for this exam
+        if (this.hasSavedProgress(examId)) {
+            console.log(`Found saved progress for ${examId}, restoring session...`);
+            await this.restoreExamSession(examId);
+        } else {
+            console.log(`No saved progress for ${examId}, starting fresh...`);
+            await this.selectExam(examId);
+        }
     }
 
     async selectExam(examId) {
@@ -135,6 +380,8 @@ class ExamPracticeApp {
 
     async loadFullExamData(examPath) {
         return new Promise((resolve, reject) => {
+            console.log(`Starting to load exam data from: ${examPath}`);
+            
             // Remove ALL existing exam and metadata scripts to prevent const redeclaration
             const existingScripts = document.querySelectorAll('script[data-exam-script], script[id^="metadata-"]');
             existingScripts.forEach(script => {
@@ -148,39 +395,87 @@ class ExamPracticeApp {
             delete window.correctAnswers; 
             delete window.topicMappings;
             
-            // Wait a moment for cleanup to complete
-            setTimeout(() => {
-                const script = document.createElement('script');
-                script.src = examPath;
-                script.setAttribute('data-exam-script', 'true');
-                
-                script.onload = () => {
-                    // Give time for the script to execute and set globals
-                    setTimeout(() => {
-                        // Verify that the required data was loaded
-                        if (typeof window.questions === 'undefined' || typeof window.correctAnswers === 'undefined' || 
-                            !Array.isArray(window.questions) || window.questions.length === 0) {
-                            console.error('Missing or invalid exam data:', {
+            // Clear the const variables that might be causing issues
+            try {
+                delete window.capaExamInfo;
+                delete window.capaQuestions;
+                delete window.capaCorrectAnswers;
+                delete window.capaTopicMappings;
+                delete window.cgoaExamInfo;
+                delete window.cgoaQuestions;
+                delete window.cgoaCorrectAnswers;
+                delete window.cgoaTopicMappings;
+            } catch (e) {
+                console.log('Could not delete const variables (expected):', e.message);
+            }
+            
+            // Force garbage collection opportunity
+            if (window.gc) {
+                window.gc();
+            }
+            
+            // Instead of relying on script reloading, fetch and eval the content
+            console.log('Fetching exam data via fetch API...');
+            fetch(examPath + '?t=' + Date.now())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch ${examPath}: ${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(scriptContent => {
+                    console.log(`Fetched script content, length: ${scriptContent.length}`);
+                    
+                    // Replace const declarations with var to avoid redeclaration errors
+                    const modifiedScript = scriptContent
+                        .replace(/const (capa|cgoa)ExamInfo/g, 'var $1ExamInfo')
+                        .replace(/const (capa|cgoa)Questions/g, 'var $1Questions') 
+                        .replace(/const (capa|cgoa)CorrectAnswers/g, 'var $1CorrectAnswers')
+                        .replace(/const (capa|cgoa)TopicMappings/g, 'var $1TopicMappings');
+                    
+                    console.log('Executing modified script...');
+                    
+                    try {
+                        // Execute the script content
+                        eval(modifiedScript);
+                        
+                        // Give a moment for execution to complete
+                        setTimeout(() => {
+                            // Log current state for debugging
+                            console.log('Current global state after eval:', {
+                                examInfo: typeof window.examInfo,
                                 questions: typeof window.questions,
-                                correctAnswers: typeof window.correctAnswers,
+                                questionsArray: Array.isArray(window.questions),
                                 questionsLength: window.questions ? window.questions.length : 'undefined',
-                                isArray: Array.isArray(window.questions)
+                                correctAnswers: typeof window.correctAnswers,
+                                topicMappings: typeof window.topicMappings
                             });
-                            reject(new Error(`Exam data incomplete. Missing questions or answers in ${examPath}`));
-                        } else {
-                            console.log(`Successfully loaded exam data from ${examPath}. Total questions: ${window.questions.length}`);
-                            resolve();
-                        }
-                    }, 100); // Increased delay for script execution
-                };
-                
-                script.onerror = (event) => {
-                    console.error('Script loading error for:', examPath, event);
-                    reject(new Error(`Failed to load exam file: ${examPath}. Check that the file exists and is accessible.`));
-                };
-                
-                document.head.appendChild(script);
-            }, 50); // Delay before adding new script
+                            
+                            // Verify that the required data was loaded
+                            if (typeof window.questions === 'undefined' || typeof window.correctAnswers === 'undefined' || 
+                                !Array.isArray(window.questions) || window.questions.length === 0) {
+                                console.error('Missing or invalid exam data after eval:', {
+                                    questions: typeof window.questions,
+                                    correctAnswers: typeof window.correctAnswers,
+                                    questionsLength: window.questions ? window.questions.length : 'undefined',
+                                    isArray: Array.isArray(window.questions)
+                                });
+                                reject(new Error(`Exam data incomplete. Missing questions or answers in ${examPath}`));
+                            } else {
+                                console.log(`Successfully loaded exam data from ${examPath}. Total questions: ${window.questions.length}`);
+                                resolve();
+                            }
+                        }, 100);
+                        
+                    } catch (evalError) {
+                        console.error('Error executing script:', evalError);
+                        reject(new Error(`Failed to execute exam script: ${evalError.message}`));
+                    }
+                })
+                .catch(fetchError => {
+                    console.error('Error fetching script:', fetchError);
+                    reject(new Error(`Failed to fetch exam file: ${examPath}. ${fetchError.message}`));
+                });
         });
     }
 
@@ -245,6 +540,7 @@ class ExamPracticeApp {
                     <button class="button" onclick="showAnswers()">📖 Show All Answers & Explanations</button>
                     <button class="button" onclick="hideAnswers()">🙈 Hide All Answers & Explanations</button>
                     <button class="button" onclick="resetQuiz()">🔄 Reset Quiz</button>
+                    <button class="button secondary" onclick="app.clearProgressConfirm()" title="Clear all saved progress for this exam">🗑️ Clear Progress</button>
                     <button class="button" onclick="showSummaryReport()">📊 Show Summary Report</button>
                     <button class="button hide-summary-btn" id="hideSummaryBtn" onclick="hideSummaryReport()">❌ Hide Summary Report</button>
                 </div>
@@ -449,6 +745,28 @@ src/
         `;
     }
 
+    // Clear progress with confirmation
+    clearProgressConfirm() {
+        const answeredCount = Object.keys(this.userAnswers).length;
+        const flaggedCount = this.flaggedQuestions.size;
+        
+        if (answeredCount === 0 && flaggedCount === 0) {
+            alert('No progress to clear.');
+            return;
+        }
+        
+        const examName = this.currentExam ? this.currentExam.name : 'this exam';
+        const message = `Are you sure you want to clear all saved progress for ${examName}?\n\nThis will remove:\n• ${answeredCount} answered questions\n• ${flaggedCount} flagged questions\n• Current page position\n\nThis action cannot be undone.`;
+        
+        if (confirm(message)) {
+            const examId = this.currentExam ? this.currentExam.id : null;
+            this.clearProgress(examId);
+            this.resetExamState();
+            this.showExamInterface();
+            alert('Progress cleared successfully!');
+        }
+    }
+
     // The rest of the functionality will be handled by global functions
     // for compatibility with the existing inline event handlers
 }
@@ -493,6 +811,9 @@ function goToPage(page) {
         app.currentPage = page;
         loadQuestions();
         updatePagination();
+        
+        // Auto-save progress when page changes
+        app.saveProgress();
     }
 }
 
@@ -530,6 +851,9 @@ function toggleQuestionFlag(questionId) {
     } else {
         app.flaggedQuestions.add(questionId);
     }
+    
+    // Auto-save progress
+    app.saveProgress();
     
     // Update the flag button appearance
     const flagBtn = document.querySelector(`[data-question="${questionId}"] .flag-btn`);

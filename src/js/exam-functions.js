@@ -4,6 +4,9 @@
 function answerQuestion(questionId, selectedAnswer) {
     app.userAnswers[questionId] = selectedAnswer;
     
+    // Auto-save progress
+    app.saveProgress();
+    
     // Show answer and explanation for this question
     const answerSection = document.getElementById(`answer${questionId}`);
     const explanationSection = document.getElementById(`explanation${questionId}`);

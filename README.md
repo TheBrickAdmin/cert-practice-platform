@@ -22,9 +22,39 @@ This platform, code, and all practice exam content have been created using Artif
 - **Question Flagging**: Flag difficult questions and filter by flagged/unanswered status
 - **Flexible Study Options**: Pagination (5-100 questions per page), jump navigation, collapsible sections
 - **Advanced Analytics**: Topic-based performance analysis and comprehensive summary reports
+- **Automatic Progress Saving**: Your answers, flagged questions, and current position are automatically saved
+- **Session Recovery**: Restore your previous study session after page reloads or browser restarts
 - **Professional Interface**: Clean, responsive design with smooth animations and mobile support
 - **Robust Error Handling**: Clear error messages with troubleshooting guidance
 - **Zero Dependencies**: Pure client-side application - works offline and online
+
+## 💾 Progress Saving & Session Management
+
+The platform automatically saves your study progress using browser localStorage, ensuring you never lose your work:
+
+### 🔄 Automatic Saving
+- **Answer Storage**: Every answer is immediately saved when submitted
+- **Flag Tracking**: Question flags are saved as you mark them
+- **Page Position**: Current page and filters are preserved
+- **Cross-Session**: Progress persists through page reloads, browser restarts, and computer reboots
+
+### 📂 Session Recovery
+- **Smart Detection**: Platform automatically detects previous sessions when you return
+- **Restore Options**: Choose to continue where you left off or start fresh
+- **Progress Summary**: See exactly what progress will be restored before choosing
+- **Multiple Exams**: Each exam maintains separate progress tracking
+
+### 🗑️ Progress Management
+- **Manual Clearing**: Use the "Clear Progress" button to reset your session
+- **Confirmation Dialogs**: Prevents accidental progress loss with detailed confirmations
+- **Fresh Start**: Easy option to begin with a clean slate at any time
+- **Selective Clearing**: Choose to clear progress for specific exams or start over entirely
+
+### 🔒 Privacy & Storage
+- **Local Only**: All progress data stays on your device - nothing sent to servers
+- **Browser Storage**: Uses localStorage for reliable, persistent storage
+- **No Tracking**: No external analytics or progress tracking services
+- **Your Control**: You maintain complete control over your study data
 
 ## 📁 Project Structure
 

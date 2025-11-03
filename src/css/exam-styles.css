@@ -84,6 +84,61 @@ body {
     padding-bottom: 10px;
 }
 
+/* Progress Restore Section Styles */
+.progress-restore-notice {
+    color: #1565c0 !important; /* Dark blue text for good contrast on light blue background */
+}
+
+.progress-restore-notice h3 {
+    color: #1976d2 !important; /* Ensure header is readable */
+}
+
+.progress-restore-notice p, 
+.progress-restore-notice li {
+    color: #1565c0 !important; /* Dark blue for all text content */
+}
+
+.progress-restore-notice strong {
+    color: #0d47a1 !important; /* Even darker blue for emphasis */
+}
+
+/* Better contrast for the "Or select a different exam below" text */
+.exam-selector > p[style*="color: #666"] {
+    color: rgba(255, 255, 255, 0.9) !important; /* Light text on dark background */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add subtle shadow for better readability */
+}
+
+/* Progress indicators for exam cards */
+.exam-card.has-progress {
+    border-left: 4px solid #4caf50; /* Green border for cards with progress */
+}
+
+.progress-indicator {
+    background: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-summary {
+    background: #e8f5e8;
+    color: #2e7d32;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border-left: 3px solid #4caf50;
+}
+
+.progress-summary small {
+    font-size: 12px;
+    font-weight: 500;
+}
+
 .exam-features ul {
     margin: 15px 0;
     padding-left: 0;
