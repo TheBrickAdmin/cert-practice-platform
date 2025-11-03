@@ -30,13 +30,22 @@ class ExamPracticeApp {
             const registryExams = getAvailableExams();
             console.log('Registry exams found:', registryExams.length, registryExams.map(e => e.name));
             
+            // Don't load exam scripts during initialization to avoid const redeclaration errors
+            // Just use the registry data and validate files later when needed
             for (const examMeta of registryExams) {
                 try {
-                    console.log(`Loading exam: ${examMeta.name} from ${examMeta.file}`);
-                    await this.loadExamMetadata(examMeta.file, examMeta);
-                    console.log(`Successfully loaded: ${examMeta.name}`);
+                    console.log(`Adding exam from registry: ${examMeta.name}`);
+                    
+                    // Create exam data from registry metadata only
+                    const examData = {
+                        ...examMeta,
+                        path: examMeta.file
+                    };
+                    
+                    this.availableExams.push(examData);
+                    console.log(`Successfully added: ${examMeta.name}`);
                 } catch (error) {
-                    console.warn(`Failed to load exam: ${examMeta.name}`, error);
+                    console.warn(`Failed to add exam: ${examMeta.name}`, error);
                 }
             }
             
@@ -49,39 +58,6 @@ class ExamPracticeApp {
             console.error('Failed to load available exams:', error);
             this.showLoadingError(error.message);
         }
-    }
-
-    async loadExamMetadata(examPath, registryMetadata = null) {
-        console.log(`Loading exam metadata from: ${examPath}`);
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = examPath;
-            script.onload = () => {
-                console.log(`Script loaded: ${examPath}, checking window.examInfo...`);
-                if (window.examInfo) {
-                    // Merge registry metadata with file metadata
-                    const examData = {
-                        ...window.examInfo,
-                        ...registryMetadata, // Registry data takes precedence
-                        path: examPath
-                    };
-                    
-                    console.log(`Exam data created:`, examData.name, examData.id);
-                    this.availableExams.push(examData);
-                    // Clear the global examInfo to avoid conflicts
-                    window.examInfo = null;
-                    resolve();
-                } else {
-                    console.error(`No examInfo found in ${examPath}`);
-                    reject(new Error(`Exam metadata not found in ${examPath}`));
-                }
-            };
-            script.onerror = (error) => {
-                console.error(`Script load error for ${examPath}:`, error);
-                reject(new Error(`Failed to load exam file: ${examPath}`));
-            };
-            document.head.appendChild(script);
-        });
     }
 
     showExamSelector() {
@@ -159,30 +135,52 @@ class ExamPracticeApp {
 
     async loadFullExamData(examPath) {
         return new Promise((resolve, reject) => {
-            // Remove existing exam script if any
-            const existingScript = document.querySelector('script[data-exam-script]');
-            if (existingScript) {
-                existingScript.remove();
-            }
-
-            const script = document.createElement('script');
-            script.src = examPath;
-            script.setAttribute('data-exam-script', 'true');
+            // Remove ALL existing exam and metadata scripts to prevent const redeclaration
+            const existingScripts = document.querySelectorAll('script[data-exam-script], script[id^="metadata-"]');
+            existingScripts.forEach(script => {
+                console.log('Removing existing script:', script.src || script.id);
+                script.remove();
+            });
             
-            script.onload = () => {
-                // Verify that the required data was loaded
-                if (typeof window.questions === 'undefined' || typeof window.correctAnswers === 'undefined') {
-                    reject(new Error(`Exam data incomplete. Missing questions or answers in ${examPath}`));
-                } else {
-                    resolve();
-                }
-            };
+            // Clear any existing global exam variables
+            delete window.examInfo;
+            delete window.questions;
+            delete window.correctAnswers; 
+            delete window.topicMappings;
             
-            script.onerror = (event) => {
-                reject(new Error(`Failed to load exam file: ${examPath}. Check that the file exists and is accessible.`));
-            };
-            
-            document.head.appendChild(script);
+            // Wait a moment for cleanup to complete
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.src = examPath;
+                script.setAttribute('data-exam-script', 'true');
+                
+                script.onload = () => {
+                    // Give time for the script to execute and set globals
+                    setTimeout(() => {
+                        // Verify that the required data was loaded
+                        if (typeof window.questions === 'undefined' || typeof window.correctAnswers === 'undefined' || 
+                            !Array.isArray(window.questions) || window.questions.length === 0) {
+                            console.error('Missing or invalid exam data:', {
+                                questions: typeof window.questions,
+                                correctAnswers: typeof window.correctAnswers,
+                                questionsLength: window.questions ? window.questions.length : 'undefined',
+                                isArray: Array.isArray(window.questions)
+                            });
+                            reject(new Error(`Exam data incomplete. Missing questions or answers in ${examPath}`));
+                        } else {
+                            console.log(`Successfully loaded exam data from ${examPath}. Total questions: ${window.questions.length}`);
+                            resolve();
+                        }
+                    }, 100); // Increased delay for script execution
+                };
+                
+                script.onerror = (event) => {
+                    console.error('Script loading error for:', examPath, event);
+                    reject(new Error(`Failed to load exam file: ${examPath}. Check that the file exists and is accessible.`));
+                };
+                
+                document.head.appendChild(script);
+            }, 50); // Delay before adding new script
         });
     }
 
