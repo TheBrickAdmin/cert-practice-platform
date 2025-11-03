@@ -10,7 +10,7 @@ const examRegistry = {
         version: '1.0',
         totalQuestions: 60,
         passingScore: 75,
-        timeLimit: 120,
+        timeLimit: 90,
         topics: ['Argo CD', 'Argo Workflows', 'Argo Events', 'Argo Rollouts', 'GitOps Fundamentals', 'Kubernetes Integration'],
         difficulty: 'Intermediate to Advanced',
         lastUpdated: '2025-11-02'

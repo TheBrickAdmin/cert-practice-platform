@@ -8,7 +8,7 @@ const capaExamInfo = {
     version: '1.0',
     totalQuestions: 60,
     passingScore: 70,
-    timeLimit: 120, // minutes
+    timeLimit: 90, // minutes
     topics: ['Argo CD Fundamentals', 'Argo CD Advanced', 'Argo Workflows', 'Argo Events', 'Argo Rollouts', 'Integration & Advanced'],
     lastUpdated: '2025-11-02'
 };
