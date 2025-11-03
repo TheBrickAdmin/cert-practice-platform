@@ -190,99 +190,104 @@ function getNoQuestionsMessage() {
 }
 
 function updateScore() {
-    if (!window.questions || !window.correctAnswers) return;
+    try {
+        if (!window.questions || !window.correctAnswers) {
+            return;
+        }
 
-    let attempted = 0;
-    let correct = 0;
-    app.missedQuestions = [];
+        let attempted = 0;
+        let correct = 0;
+        app.missedQuestions = [];
 
-    // Reset topic scores
-    const topicScores = {};
-    if (window.topicMappings) {
-        Object.keys(window.topicMappings).forEach(topic => {
-            topicScores[topic] = { attempted: 0, correct: 0 };
-        });
-    }
+        // Reset topic scores
+        const topicScores = {};
+        if (window.topicMappings) {
+            Object.keys(window.topicMappings).forEach(topic => {
+                topicScores[topic] = { attempted: 0, correct: 0 };
+            });
+        }
 
-    for (let i = 1; i <= window.questions.length; i++) {
-        const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
-        
-        if (checkedRadio) {
-            attempted++;
-            const selectedAnswer = checkedRadio.value;
-            app.userAnswers[i] = selectedAnswer;
-            const isCorrect = window.correctAnswers[i] && selectedAnswer === window.correctAnswers[i];
-            
-            if (isCorrect) {
-                correct++;
-            } else {
-                app.missedQuestions.push({
-                    questionNumber: i,
-                    selectedAnswer: selectedAnswer,
-                    correctAnswer: window.correctAnswers[i]
-                });
-            }
+        // Count answers across all pages using app.userAnswers
+        for (let i = 1; i <= window.questions.length; i++) {
+            const selectedAnswer = app.userAnswers[i];
+            if (selectedAnswer) {
+                attempted++;
+                const isCorrect = window.correctAnswers[i] && selectedAnswer === window.correctAnswers[i];
+                
+                if (isCorrect) {
+                    correct++;
+                } else {
+                    app.missedQuestions.push({
+                        questionNumber: i,
+                        selectedAnswer: selectedAnswer,
+                        correctAnswer: window.correctAnswers[i]
+                    });
+                }
 
-            // Update topic scores
-            if (window.topicMappings) {
-                Object.entries(window.topicMappings).forEach(([topic, questionNums]) => {
-                    if (questionNums.includes(i)) {
-                        topicScores[topic].attempted++;
-                        if (isCorrect) topicScores[topic].correct++;
-                    }
-                });
+                // Update topic scores
+                if (window.topicMappings) {
+                    Object.entries(window.topicMappings).forEach(([topic, questionNums]) => {
+                        if (questionNums.includes(i)) {
+                            topicScores[topic].attempted++;
+                            if (isCorrect) topicScores[topic].correct++;
+                        }
+                    });
+                }
             }
         }
-    }
 
-    // Update display
-    const percentage = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-    const attemptedEl = document.getElementById('attempted');
-    const correctEl = document.getElementById('correct');
-    const percentageEl = document.getElementById('percentage');
-    const statusEl = document.getElementById('status');
+        // Update DOM elements
+        const percentage = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+        const attemptedEl = document.getElementById('attempted');
+        const correctEl = document.getElementById('correct');
+        const percentageEl = document.getElementById('percentage');
+        const statusEl = document.getElementById('status');
 
-    if (attemptedEl) attemptedEl.textContent = attempted;
-    if (correctEl) correctEl.textContent = correct;
-    if (percentageEl) percentageEl.textContent = percentage + '%';
+        if (attemptedEl) attemptedEl.textContent = attempted;
+        if (correctEl) correctEl.textContent = correct;
+        if (percentageEl) percentageEl.textContent = percentage + '%';
 
-    // Update status
-    let status, emoji;
-    if (percentage >= app.currentExam.passingScore) {
-        status = "Ready to Pass!";
-        emoji = "🎉";
-    } else if (percentage >= 60) {
-        status = "Almost There!";
-        emoji = "📈";
-    } else if (percentage >= 40) {
-        status = "Keep Practicing";
-        emoji = "📚";
-    } else {
-        status = "Needs More Study";
-        emoji = "💪";
-    }
+        // Update status
+        let status, emoji;
+        if (percentage >= app.currentExam.passingScore) {
+            status = "Ready to Pass!";
+            emoji = "🎉";
+        } else if (percentage >= 60) {
+            status = "Almost There!";
+            emoji = "📈";
+        } else if (percentage >= 40) {
+            status = "Keep Practicing";
+            emoji = "📚";
+        } else {
+            status = "Needs More Study";
+            emoji = "💪";
+        }
 
-    if (statusEl) statusEl.textContent = `${emoji} ${status}`;
+        if (statusEl) statusEl.textContent = `${emoji} ${status}`;
 
-    // Update progress bar
-    const progressBar = document.getElementById('progressBar');
-    if (progressBar) {
-        progressBar.style.width = percentage + '%';
-    }
+        // Update progress bar
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.width = percentage + '%';
+        }
 
-    // Update topic breakdown
-    if (window.topicMappings) {
-        Object.entries(topicScores).forEach(([topic, scores], index) => {
-            const percentage = scores.attempted > 0 ? Math.round((scores.correct / scores.attempted) * 100) : 0;
-            let emoji = '📚';
-            if (percentage >= 80) emoji = '🎯';
-            else if (percentage >= 60) emoji = '📈';
-            else if (percentage >= 40) emoji = '⚠️';
+        // Update topic breakdown
+        if (window.topicMappings) {
+            Object.entries(topicScores).forEach(([topic, scores], index) => {
+                const percentage = scores.attempted > 0 ? Math.round((scores.correct / scores.attempted) * 100) : 0;
+                let emoji = '📚';
+                if (percentage >= 80) emoji = '🎯';
+                else if (percentage >= 60) emoji = '📈';
+                else if (percentage >= 40) emoji = '⚠️';
 
-            const scoreText = `${scores.correct}/${scores.attempted} (${percentage}%) ${emoji}`;
-            const topicElement = document.getElementById(`topic${index + 1}`);
-            if (topicElement) topicElement.textContent = scoreText;
-        });
+                const scoreText = `${scores.correct}/${scores.attempted} (${percentage}%) ${emoji}`;
+                const topicElement = document.getElementById(`topic${index + 1}`);
+                if (topicElement) topicElement.textContent = scoreText;
+            });
+        }
+
+    } catch (error) {
+        console.error('Error in updateScore:', error);
     }
 }
 

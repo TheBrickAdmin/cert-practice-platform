@@ -606,6 +606,10 @@ class ExamPracticeApp {
         `;
 
         this.setupTopicBreakdown();
+        
+        // Load any saved progress for this exam before displaying questions and calculating score
+        this.loadProgress(this.currentExam.id);
+        
         loadQuestions();  // Global function from exam-functions.js
         updateScore();    // Global function from exam-functions.js
         updatePagination(); // Global function defined below
@@ -831,6 +835,7 @@ function goToPage(page) {
     if (page >= 1 && page <= app.totalPages) {
         app.currentPage = page;
         loadQuestions();
+        updateScore();      // Recalculate score to show all answers across all pages
         updatePagination();
         
         // Auto-save progress when page changes
@@ -855,6 +860,7 @@ function changeQuestionsPerPage() {
     app.questionsPerPage = parseInt(select.value);
     app.currentPage = 1; // Reset to first page
     loadQuestions();
+    updateScore();      // Recalculate score after changing display
     updatePagination();
 }
 
@@ -863,6 +869,7 @@ function changeQuestionFilter() {
     app.currentFilter = select.value;
     app.currentPage = 1; // Reset to first page
     loadQuestions();
+    updateScore();      // Recalculate score after changing filter
     updatePagination();
 }
 
