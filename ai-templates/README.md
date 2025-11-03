@@ -30,5 +30,7 @@ Add the new exam to the registry using the instructions in `registry-update-guid
 
 - Always include the AI disclaimer in generated content
 - Verify technical accuracy against official documentation
+- **Check Answer Distribution**: Ensure correct answers are evenly distributed across A, B, C, D options
+- **Avoid Answer Bias**: AI models often favor option B - manually verify and rearrange if needed
 - Test the exam thoroughly before publishing
 - Follow the existing naming conventions and file structure

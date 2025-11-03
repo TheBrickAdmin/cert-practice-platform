@@ -41,6 +41,9 @@ Example:
 - Cover troubleshooting and best practices
 - Ensure accuracy and technical correctness
 - Add appropriate difficulty progression from basic to advanced
+- **IMPORTANT**: Ensure correct answers are evenly distributed across A, B, C, D options
+- **AVOID BIAS**: Do not make most correct answers option B - randomize the correct option positions
+- **BALANCE CHECK**: Verify that approximately 25% of answers are A, 25% are B, 25% are C, and 25% are D
 
 ### Output Format:
 Please generate:
@@ -53,6 +56,8 @@ Please generate:
 - Include a comment that this content is AI-generated
 - Note that questions should be verified against official documentation
 - Recommend cross-referencing with authoritative sources
+- **CRITICAL**: Verify that correct answers are evenly distributed across all options (A, B, C, D)
+- **AVOID ANSWER BIAS**: Ensure approximately equal distribution rather than favoring any single option
 
 Please create the complete exam following the JavaScript template structure used in the existing platform.
 ```
@@ -65,6 +70,9 @@ Please create the complete exam following the JavaScript template structure used
 3. Follow the existing platform's code structure exactly
 4. Include comprehensive explanations for each answer
 5. Ensure topic distribution is balanced and realistic
+6. **VERIFY ANSWER DISTRIBUTION**: Check that correct answers are evenly spread across A, B, C, D
+7. **RANDOMIZE CORRECT OPTIONS**: Avoid clustering most correct answers on option B
+8. **BALANCE VALIDATION**: Aim for roughly 25% of questions having each letter as the correct answer
 
 ### Example Certifications to Target:
 - AWS certifications (Solutions Architect, Developer, SysOps)
@@ -85,3 +93,5 @@ Please create the complete exam following the JavaScript template structure used
 - Cover real-world scenarios and best practices
 - Include appropriate references to official documentation
 - Maintain consistent difficulty progression
+- **Answer distribution must be balanced across A, B, C, D options**
+- **Avoid answer pattern bias that makes exams predictable**

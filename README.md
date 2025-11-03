@@ -15,6 +15,8 @@ This platform, code, and all practice exam content have been created using Artif
 
 **📚 Recommendation**: Always cross-reference answers with official documentation and use authoritative study resources for comprehensive exam preparation. This platform should supplement, not replace, official study materials.
 
+**⚖️ Answer Bias Warning**: When using AI to generate exam content, be aware that AI models may create biased answer distributions (e.g., most correct answers being option B). Always verify that correct answers are evenly distributed across A, B, C, D options to provide realistic practice. The current exams in this platform have been balanced to ensure proper distribution.
+
 ## ✨ Key Features
 
 - **Multi-Exam Architecture**: Modular design supports multiple certification types
@@ -255,8 +257,11 @@ I need you to create a comprehensive practice exam for the AWS Certified Solutio
 - ✅ **Quality Guidelines**: Built-in quality assurance processes
 - ✅ **Educational Value**: AI can create diverse, scenario-based questions
 - ⚠️ **Verification Required**: Always validate technical accuracy against official sources
+- ⚠️ **Answer Bias Check**: Ensure AI doesn't create biased answer distributions (e.g., too many B answers)
 
 > **💡 Pro Tip**: Use the AI templates to quickly create exams for popular multiple-choice certifications like AWS Solutions Architect, Azure Administrator, CompTIA Security+, and more! Avoid performance-based exams like CKA/CKAD/CKS.
+
+> **⚖️ Answer Distribution Warning**: AI models often exhibit answer bias, favoring certain options (usually B). Always ask your AI assistant to verify that correct answers are evenly distributed across A, B, C, D options, or manually rearrange options to achieve balance. Real certification exams typically have balanced distributions.
 
 ## 🛠️ Technical Architecture
 

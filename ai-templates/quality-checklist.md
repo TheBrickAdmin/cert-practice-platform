@@ -32,7 +32,9 @@ Use this checklist to ensure the quality and accuracy of AI-generated certificat
 - [ ] **Appropriate Difficulty**: Questions match target certification level
 - [ ] **Four Valid Options**: All multiple choice questions have exactly 4 options
 - [ ] **Plausible Distractors**: Incorrect options are realistic but clearly wrong
-- [ ] **No Obvious Patterns**: Correct answers are distributed (not all B, etc.)
+- [ ] **Balanced Answer Distribution**: Correct answers are evenly distributed across A, B, C, D options
+- [ ] **No Answer Bias**: Avoid clustering correct answers on option B or any single option
+- [ ] **Distribution Check**: Approximately 25% of answers should be A, 25% B, 25% C, 25% D
 
 ### Answer Explanations
 - [ ] **Comprehensive**: Explanations fully justify the correct answer
@@ -40,6 +42,33 @@ Use this checklist to ensure the quality and accuracy of AI-generated certificat
 - [ ] **Reference Links**: Include links to official documentation when relevant
 - [ ] **Wrong Answer Analysis**: Explain why incorrect options are wrong
 - [ ] **Additional Context**: Provide related information and best practices
+
+## 📊 Answer Distribution Validation
+
+### Statistical Balance Check
+- [ ] **Count A Answers**: Verify roughly 25% of correct answers are option A
+- [ ] **Count B Answers**: Verify roughly 25% of correct answers are option B  
+- [ ] **Count C Answers**: Verify roughly 25% of correct answers are option C
+- [ ] **Count D Answers**: Verify roughly 25% of correct answers are option D
+- [ ] **No Single Option Dominance**: No option should exceed 40% of total answers
+- [ ] **Minimum Representation**: Each option should represent at least 15% of answers
+
+### AI Bias Detection
+- [ ] **B-Option Bias**: Common AI bias - verify option B isn't over-represented
+- [ ] **Pattern Analysis**: Check for any systematic answer patterns
+- [ ] **Randomization Test**: Answers should appear randomly distributed when viewed sequentially
+- [ ] **Manual Review**: Human review of answer distribution statistics
+- [ ] **Rearrangement**: If biased, rearrange question options to balance distribution
+
+### Validation Commands
+Use these commands to check answer distribution:
+```bash
+# Count answer distribution in exam file
+grep -o ": '[A-D]'" exam-file.js | sort | uniq -c
+
+# Quick distribution check
+node -e "console.log(require('fs').readFileSync('exam-file.js','utf8').match(/: '[A-D]'/g).reduce((acc,x)=>(acc[x[3]]=acc[x[3]]+1||1,acc),{}))"
+```
 
 ## 🧪 Technical Validation
 
@@ -114,6 +143,8 @@ Use this checklist to ensure the quality and accuracy of AI-generated certificat
 - [ ] **40-50% Medium**: Applied knowledge questions  
 - [ ] **20-30% Hard**: Complex scenario questions
 - [ ] **Realistic Passing**: 70-80% of well-prepared users should pass
+- [ ] **Answer Balance**: Correct answers distributed evenly across A, B, C, D (roughly 25% each)
+- [ ] **No Pattern Bias**: Users cannot "game" the exam by favoring one answer option
 
 ### Topic Balance Verification
 - [ ] **Equal Weight**: Topics weighted according to official objectives
