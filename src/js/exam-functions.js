@@ -138,7 +138,24 @@ function loadQuestions() {
         }
     });
     
+    // Update pagination first to ensure app.totalPages is calculated
     updatePagination();
+    
+    // Add "Finish Exam" button if this is the last page and showing all questions filter
+    if (app.currentPage === app.totalPages && app.currentFilter === 'all') {
+        const finishButton = document.createElement('div');
+        finishButton.className = 'finish-exam-section';
+        finishButton.innerHTML = `
+            <div class="finish-exam-container">
+                <h3>🎯 Ready to Finish?</h3>
+                <p>You've reached the end of the exam. Click below to finalize your results and see your comprehensive performance report.</p>
+                <button class="button finish-exam-btn" onclick="finishExam()">
+                    🏁 Finish Exam & View Results
+                </button>
+            </div>
+        `;
+        container.appendChild(finishButton);
+    }
 }
 
 function getFilteredQuestions() {
@@ -236,8 +253,11 @@ function updateScore() {
             }
         }
 
-        // Update DOM elements
-        const percentage = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+        // Calculate score based on total questions (unanswered = wrong)
+        const totalQuestions = window.questions.length;
+        const unanswered = totalQuestions - attempted;
+        const percentage = Math.round((correct / totalQuestions) * 100);
+        
         const attemptedEl = document.getElementById('attempted');
         const correctEl = document.getElementById('correct');
         const percentageEl = document.getElementById('percentage');
@@ -247,7 +267,7 @@ function updateScore() {
         if (correctEl) correctEl.textContent = correct;
         if (percentageEl) percentageEl.textContent = percentage + '%';
 
-        // Update status
+        // Update status based on total score
         let status, emoji;
         if (percentage >= app.currentExam.passingScore) {
             status = "Ready to Pass!";
@@ -378,4 +398,358 @@ function hideSummaryReport() {
     
     if (summaryDiv) summaryDiv.classList.remove('show');
     if (hideSummaryBtn) hideSummaryBtn.classList.remove('show');
+}
+
+function finishExam() {
+    // Calculate final statistics
+    const totalQuestions = window.questions.length;
+    const answeredCount = Object.keys(app.userAnswers).length;
+    const unansweredCount = totalQuestions - answeredCount;
+    
+    let correctCount = 0;
+    app.missedQuestions = [];
+    
+    // Recalculate final results
+    for (let i = 1; i <= totalQuestions; i++) {
+        const selectedAnswer = app.userAnswers[i];
+        if (selectedAnswer) {
+            if (window.correctAnswers[i] && selectedAnswer === window.correctAnswers[i]) {
+                correctCount++;
+            } else {
+                app.missedQuestions.push({
+                    questionNumber: i,
+                    selectedAnswer: selectedAnswer,
+                    correctAnswer: window.correctAnswers[i]
+                });
+            }
+        } else {
+            // Count unanswered questions as missed
+            app.missedQuestions.push({
+                questionNumber: i,
+                selectedAnswer: null,
+                correctAnswer: window.correctAnswers[i]
+            });
+        }
+    }
+    
+    // Score is based on total questions (unanswered = wrong)
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
+    const passed = percentage >= app.currentExam.passingScore;
+    
+    // Create clean, compact results modal
+    const modalHTML = `
+        <div class="exam-results-modal" id="examResultsModal">
+            <div class="modal-content compact">
+                <div class="results-header ${passed ? 'passed' : 'failed'}">
+                    <h2>${passed ? '🎉 Congratulations!' : '📚 Keep Studying!'}</h2>
+                    <h3>${app.currentExam.name} - Final Results</h3>
+                </div>
+                
+                <div class="results-summary compact">
+                    <div class="score-grid compact">
+                        <div class="score-item large">
+                            <h3>${percentage}%</h3>
+                            <p>Your Score</p>
+                        </div>
+                        <div class="score-item">
+                            <h3>${correctCount}</h3>
+                            <p>Correct</p>
+                        </div>
+                        <div class="score-item">
+                            <h3>${answeredCount - correctCount}</h3>
+                            <p>Incorrect</p>
+                        </div>
+                        <div class="score-item">
+                            <h3>${unansweredCount}</h3>
+                            <p>Unanswered</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pass-status ${passed ? 'passed' : 'failed'}">
+                        ${passed ? 
+                            `<h4>✅ PASSED</h4><p>You achieved the passing score of ${app.currentExam.passingScore}%!</p>` :
+                            `<h4>❌ NOT PASSED</h4><p>You need ${app.currentExam.passingScore}% to pass. Keep studying!</p>`
+                        }
+                    </div>
+                </div>
+                
+                <div class="results-actions compact">
+                    <button class="button primary" onclick="showDetailedResults()">� View Detailed Report</button>
+                    <button class="button" onclick="reviewMissedQuestions()">📖 Review Missed Questions</button>
+                    <button class="button" onclick="restartExam()">🔄 Restart Exam</button>
+                    <button class="button secondary" onclick="closeExamResults()">✖️ Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to page
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Add click outside to close functionality
+    const modal = document.getElementById('examResultsModal');
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeExamResults();
+        }
+    });
+}
+
+function getTopicBreakdownHTML() {
+    if (!window.topicMappings) return '';
+    
+    let topicHTML = '<div class="topic-results"><h4>📊 Performance by Topic</h4>';
+    
+    Object.entries(window.topicMappings).forEach(([topic, questionNums]) => {
+        let attempted = 0;
+        let correct = 0;
+        
+        questionNums.forEach(qNum => {
+            if (app.userAnswers[qNum]) {
+                attempted++;
+                if (window.correctAnswers[qNum] && app.userAnswers[qNum] === window.correctAnswers[qNum]) {
+                    correct++;
+                }
+            }
+        });
+        
+        const percentage = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+        let emoji = '📚';
+        if (percentage >= 80) emoji = '🎯';
+        else if (percentage >= 60) emoji = '📈';
+        else if (percentage >= 40) emoji = '⚠️';
+        
+        topicHTML += `
+            <div class="topic-result-item">
+                <span class="topic-name">${topic}</span>
+                <span class="topic-score">${correct}/${attempted} (${percentage}%) ${emoji}</span>
+            </div>
+        `;
+    });
+    
+    return topicHTML + '</div>';
+}
+
+function closeExamResults() {
+    const modal = document.getElementById('examResultsModal');
+    if (modal) {
+        modal.remove();
+    }
+    
+    // Also close detailed results if open
+    const detailedModal = document.getElementById('detailedResultsModal');
+    if (detailedModal) {
+        detailedModal.remove();
+    }
+}
+
+function showDetailedResults() {
+    // Calculate all statistics
+    const totalQuestions = window.questions.length;
+    const answeredCount = Object.keys(app.userAnswers).length;
+    const unansweredCount = totalQuestions - answeredCount;
+    
+    let correctCount = 0;
+    for (let i = 1; i <= totalQuestions; i++) {
+        const selectedAnswer = app.userAnswers[i];
+        if (selectedAnswer && window.correctAnswers[i] && selectedAnswer === window.correctAnswers[i]) {
+            correctCount++;
+        }
+    }
+    
+    // Score is based on total questions (unanswered = wrong)
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
+    const passed = percentage >= app.currentExam.passingScore;
+    
+    const detailedHTML = `
+        <div class="exam-results-modal detailed" id="detailedResultsModal">
+            <div class="modal-content full-page">
+                <div class="results-header ${passed ? 'passed' : 'failed'}">
+                    <h2>📊 Detailed Exam Report</h2>
+                    <h3>${app.currentExam.name}</h3>
+                </div>
+                
+                <div class="detailed-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>${percentage}%</h3>
+                            <p>Your Final Score</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>${correctCount}</h3>
+                            <p>Correct Answers</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>${answeredCount - correctCount}</h3>
+                            <p>Incorrect Answers</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>${unansweredCount}</h3>
+                            <p>Unanswered Questions</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>${app.currentExam.passingScore}%</h3>
+                            <p>Required to Pass</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pass-status ${passed ? 'passed' : 'failed'}">
+                        ${passed ? 
+                            `<h4>✅ EXAM PASSED</h4><p>Excellent work! You achieved the passing score of ${app.currentExam.passingScore}%!</p>` :
+                            `<h4>❌ EXAM NOT PASSED</h4><p>You need ${app.currentExam.passingScore}% to pass. Review your weak areas and try again!</p>`
+                        }
+                    </div>
+                </div>
+                
+                ${getTopicBreakdownHTML()}
+                
+                <div class="detailed-actions">
+                    <button class="button" onclick="reviewMissedQuestions()">📖 Review Missed Questions</button>
+                    <button class="button" onclick="restartExam()">🔄 Restart Exam</button>
+                    <button class="button secondary" onclick="closeDetailedResults()">← Back to Summary</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', detailedHTML);
+    
+    // Add click outside to close functionality
+    const modal = document.getElementById('detailedResultsModal');
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeDetailedResults();
+        }
+    });
+}
+
+function closeDetailedResults() {
+    const modal = document.getElementById('detailedResultsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function reviewMissedQuestions() {
+    if (!app.missedQuestions || app.missedQuestions.length === 0) {
+        alert('Great job! You didn\'t miss any questions that you answered.');
+        return;
+    }
+    
+    // Close any open modals
+    closeExamResults();
+    closeDetailedResults();
+    
+    // Create missed questions review page
+    const reviewHTML = `
+        <div class="exam-results-modal review" id="missedQuestionsModal">
+            <div class="modal-content full-page">
+                <div class="results-header review">
+                    <h2>📖 Questions to Review</h2>
+                    <h3>${app.missedQuestions.length} questions need your attention</h3>
+                </div>
+                
+                <div class="missed-questions-list">
+                    ${app.missedQuestions.map(missed => {
+                        const question = window.questions[missed.questionNumber - 1];
+                        
+                        // Convert letters to array indices (A=0, B=1, C=2, D=3)
+                        const selectedIndex = missed.selectedAnswer ? missed.selectedAnswer.charCodeAt(0) - 65 : -1;
+                        const correctIndex = missed.correctAnswer.charCodeAt(0) - 65;
+                        
+                        // Get the full text for selected and correct answers
+                        const selectedAnswerText = missed.selectedAnswer ? (question.options[selectedIndex] || missed.selectedAnswer) : null;
+                        const correctAnswerText = question.options[correctIndex] || missed.correctAnswer;
+                        
+                        return `
+                            <div class="missed-question-card">
+                                <div class="question-header">
+                                    <h4>Question ${missed.questionNumber}</h4>
+                                    <span class="result-indicator incorrect">❌ Incorrect</span>
+                                </div>
+                                <div class="question-text">${question.question}</div>
+                                <div class="answer-comparison">
+                                    ${missed.selectedAnswer ? `
+                                        <div class="your-answer incorrect">
+                                            <strong>Your Answer (${missed.selectedAnswer}):</strong> ${selectedAnswerText}
+                                        </div>
+                                    ` : `
+                                        <div class="your-answer incorrect">
+                                            <strong>Your Answer:</strong> <em>Not answered</em>
+                                        </div>
+                                    `}
+                                    <div class="correct-answer">
+                                        <strong>Correct Answer (${missed.correctAnswer}):</strong> <span class="answer-text">${correctAnswerText}</span>
+                                    </div>
+                                </div>
+                                <div class="question-actions">
+                                    <button class="button small" onclick="goToQuestion(${missed.questionNumber})">📍 Go to Question</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <div class="review-actions">
+                    <button class="button primary" onclick="restartExam()">🔄 Restart Exam</button>
+                    <button class="button secondary" onclick="closeMissedQuestions()">✖️ Close Review</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', reviewHTML);
+    
+    // Add click outside to close functionality
+    const modal = document.getElementById('missedQuestionsModal');
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeMissedQuestions();
+        }
+    });
+}
+
+function closeMissedQuestions() {
+    const modal = document.getElementById('missedQuestionsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function goToQuestion(questionNumber) {
+    // Close review modal
+    closeMissedQuestions();
+    
+    // Calculate which page the question is on
+    const questionsPerPage = app.questionsPerPage;
+    const targetPage = Math.ceil(questionNumber / questionsPerPage);
+    
+    // Go to that page
+    app.currentPage = targetPage;
+    loadQuestions();
+    
+    // Scroll to the specific question after a short delay
+    setTimeout(() => {
+        const questionElement = document.querySelector(`[data-question="${questionNumber}"]`);
+        if (questionElement) {
+            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            questionElement.style.backgroundColor = '#fff3cd';
+            setTimeout(() => {
+                questionElement.style.backgroundColor = '';
+            }, 3000);
+        }
+    }, 100);
+}
+
+function printResults() {
+    window.print();
+}
+
+function restartExam() {
+    if (confirm('Are you sure you want to restart the exam? This will clear all your current answers.')) {
+        closeExamResults();
+        closeDetailedResults();
+        closeMissedQuestions();
+        resetQuiz();
+    }
 }
