@@ -949,15 +949,15 @@ const capaQuestions = [
     },
     {
         id: 78,
-        question: "How does Argo Events handle event replay and debugging?",
+        question: "How does Argo Events handle event debugging and monitoring?",
         options: [
+            "Event debugging includes logging, payload inspection, condition evaluation, and comprehensive event flow analysis",
             "Event replay is not supported and events cannot be reprocessed once consumed without external intervention",
-            "Event debugging includes logging, payload inspection, condition evaluation, and event replay capabilities",
             "Debugging is exclusively available through external monitoring tools and not built into Argo Events native capabilities",
-            "Event replay requires manual reconstruction of events and cannot be automated through built-in mechanisms"
+            "Event monitoring requires manual log analysis and cannot be automated through built-in mechanisms"
         ],
-        answer: "Event debugging includes logging, payload inspection, condition evaluation, and event replay capabilities",
-        explanation: "Debugging tools enable developers to understand event flow, diagnose processing issues, and validate event processing logic during development and troubleshooting."
+        answer: "Event debugging includes logging, payload inspection, condition evaluation, and comprehensive event flow analysis",
+        explanation: "Argo Events provides debugging capabilities through logging, payload inspection, condition evaluation tracing, and event flow monitoring. However, event replay is not currently supported and remains a requested feature for future development."
     },
     {
         id: 79,
@@ -987,13 +987,13 @@ const capaQuestions = [
         id: 81,
         question: "What are the progressive delivery patterns supported by Argo Rollouts?",
         options: [
-            "Only canary deployments and blue-green deployments with basic traffic management capabilities",
+            "Canary deployments and blue-green deployments with advanced traffic management and automated promotion",
             "Manual deployment approval workflows with administrative oversight and validation processes",
             "Rolling updates and recreate deployments exclusively without advanced deployment strategies",
-            "Canary deployments, blue-green deployments, A/B testing setups, and feature flag integration"
+            "Only basic rolling updates with sequential pod replacement and standard Kubernetes deployment patterns"
         ],
-        answer: "Canary deployments, blue-green deployments, A/B testing setups, and feature flag integration",
-        explanation: "Argo Rollouts supports multiple progressive delivery patterns including canary deployments (gradual traffic shifting), blue-green deployments (environment switching), A/B testing setups (parallel variant comparison), and feature flag integration for controlled feature releases. These patterns enable different risk management approaches and business requirements, from technical validation to business metric optimization and user experience testing."
+        answer: "Canary deployments and blue-green deployments with advanced traffic management and automated promotion",
+        explanation: "Argo Rollouts natively supports canary deployments (gradual traffic shifting with automated promotion based on metrics) and blue-green deployments (environment switching with instant traffic cutover). These progressive delivery patterns enable safe deployments with automated rollback capabilities, traffic analysis, and promotion strategies based on success metrics."
     },
     {
         id: 82,
@@ -1233,8 +1233,8 @@ const capaCorrectAnswers = {
     41: 'C',    42: 'B',    43: 'A',    44: 'C',    45: 'D',    46: 'A',    47: 'D',    48: 'D',    49: 'B',    50: 'C',
     51: 'A',    52: 'B',    53: 'B',    54: 'C',    55: 'A',    56: 'A',    57: 'A',    58: 'B',    59: 'C',    60: 'C',
     61: 'C',    62: 'D',    63: 'C',    64: 'A',    65: 'A',    66: 'D',    67: 'D',    68: 'B',    69: 'A',    70: 'D',
-    71: 'A',    72: 'D',    73: 'C',    74: 'A',    75: 'A',    76: 'A',    77: 'D',    78: 'B',    79: 'C',    80: 'D',
-    81: 'D',    82: 'D',    83: 'B',    84: 'D',    85: 'D',    86: 'A',    87: 'A',    88: 'C',    89: 'B',    90: 'A',
+    71: 'A',    72: 'D',    73: 'C',    74: 'A',    75: 'A',    76: 'A',    77: 'D',    78: 'A',    79: 'C',    80: 'D',
+    81: 'A',    82: 'D',    83: 'B',    84: 'D',    85: 'D',    86: 'A',    87: 'A',    88: 'C',    89: 'B',    90: 'A',
     91: 'B',    92: 'C',    93: 'B',    94: 'D',    95: 'C',    96: 'D',    97: 'D',    98: 'A',    99: 'D',    100: 'B'
 };
 
