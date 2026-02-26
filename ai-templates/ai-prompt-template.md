@@ -94,3 +94,5 @@ Please create the complete exam following the JavaScript template structure used
 - Maintain consistent difficulty progression
 - **Answer distribution must be balanced across A, B, C, D options**
 - **Avoid answer pattern bias that makes exams predictable**
+- **Avoid answer length bias that make the correct answer obvious for being the longest answer**
+- **Avoid common repetitive phrasing**

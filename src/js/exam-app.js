@@ -432,10 +432,10 @@ class ExamPracticeApp {
                     
                     // Replace const declarations with var to avoid redeclaration errors
                     const modifiedScript = scriptContent
-                        .replace(/const (capa|cgoa)ExamInfo/g, 'var $1ExamInfo')
-                        .replace(/const (capa|cgoa)Questions/g, 'var $1Questions') 
-                        .replace(/const (capa|cgoa)CorrectAnswers/g, 'var $1CorrectAnswers')
-                        .replace(/const (capa|cgoa)TopicMappings/g, 'var $1TopicMappings');
+                        .replace(/const (capa|cgoa|ddf)ExamInfo/g, 'var $1ExamInfo')
+                        .replace(/const (capa|cgoa|ddf)Questions/g, 'var $1Questions') 
+                        .replace(/const (capa|cgoa|ddf)CorrectAnswers/g, 'var $1CorrectAnswers')
+                        .replace(/const (capa|cgoa|ddf)TopicMappings/g, 'var $1TopicMappings');
                     
                     console.log('Executing modified script...');
                     

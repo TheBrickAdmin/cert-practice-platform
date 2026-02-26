@@ -27,6 +27,19 @@ const examRegistry = {
         topics: ['GitOps Fundamentals', 'Git & Version Control', 'CI/CD Integration', 'GitOps Tools', 'Security & Compliance', 'Monitoring & Observability'],
         difficulty: 'Intermediate',
         lastUpdated: '2025-11-02'
+    },
+    'ddf-v1.0': {
+        id: 'ddf-v1.0',
+        name: 'DDF - Datadog Fundamentals',
+        description: 'Comprehensive practice exam for Datadog Fundamentals covering core computing concepts, Agent setup, integrations, data collection, troubleshooting, visualization, and monitor fundamentals.',
+        file: 'exams/ddf-exam-v1.0.js',
+        version: '1.0',
+        totalQuestions: 75,
+        practiceQuestionsNote: '75 practice questions in this platform',
+        passingScore: 70,
+        topics: ['Essential Concepts', 'Agent Installation & Configuration', 'Networking & Data Collection', 'Troubleshooting Datadog', 'Data Visualization & Utilization', 'Monitors, Alerts & API Access'],
+        difficulty: 'Beginner to Intermediate',
+        lastUpdated: '2026-02-26'
     }
 };
 

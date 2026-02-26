@@ -98,7 +98,7 @@ ai-templates/                 # 🤖 AI-Assisted Exam Creation
 - **Argo Rollouts**: 16 questions
 - **Integration & Enterprise Scenarios**: 20 questions
 
-### 2. Certified GitOps Associate (CGOA) v1.0 ⭐ *NEW*
+### 2. Certified GitOps Associate (CGOA) v1.0
 - **📊 Questions**: 50 comprehensive practice questions
 - **🎯 Topics**: GitOps Fundamentals, Git & Version Control, CI/CD Integration, Tools, Security, Monitoring
 - **✅ Passing Score**: 75% (Aim for 85%+ for exam readiness)
@@ -112,6 +112,21 @@ ai-templates/                 # 🤖 AI-Assisted Exam Creation
 - **GitOps Tools**: 9 questions
 - **Security & Compliance**: 7 questions
 - **Monitoring & Observability**: 7 questions
+
+### 3. Datadog Fundamentals (DDF) v1.0
+- **📊 Questions**: 75 comprehensive practice questions
+- **🎯 Topics**: Essential Concepts, Agent Installation & Configuration, Networking & Data Collection, Troubleshooting Datadog, Data Visualization & Utilization, Monitors/Alerts/API
+- **✅ Passing Score**: 70% (Aim for 80%+ for exam readiness)
+- **⏱️ Time Limit**: 120 minutes (practice mode has no time limit)
+- **📈 Difficulty**: Beginner to Intermediate
+
+#### Topic Coverage:
+- **Essential Concepts**: 10 questions
+- **Agent Installation & Configuration**: 15 questions
+- **Networking & Data Collection**: 15 questions
+- **Troubleshooting Datadog**: 10 questions
+- **Data Visualization & Utilization**: 15 questions
+- **Monitors, Alerts & API Access**: 10 questions
 
 ## 🚀 Getting Started
 
