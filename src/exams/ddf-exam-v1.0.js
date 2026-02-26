@@ -321,7 +321,7 @@ const ddfQuestions = [
         "id": 18,
         "question": "Which key type is primarily required to create or modify monitors through Datadog APIs?",
         "options": [
-            "API key only",
+            "API key",
             "Application key",
             "SSH private key file",
             "Session cookie"
