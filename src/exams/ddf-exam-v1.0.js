@@ -691,7 +691,7 @@ const ddfQuestions = [
     },
     {
         "id": 49,
-        "question": "An API script suddenly receives authorization errors despite using the same endpoint. What changed most likely caused it?",
+        "question": "An API script suddenly receives authorization errors despite using the same endpoint. What change most likely caused it?",
         "options": [
             "Application key revoked or missing permissions",
             "Host map colors were modified",
