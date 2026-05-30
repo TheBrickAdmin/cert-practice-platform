@@ -70,18 +70,18 @@ src/                          # 📦 Shareable Application
 │   ├── exam-app.js          # Core application logic and exam management
 │   └── exam-functions.js    # Question handling, scoring, and reports
 └── exams/
-    ├── capa-exam-v1.0.js    # CAPA certification exam data
+    ├── capa-exam-v1.0.js    # CAPA certification exam data    
+    ├── cba-exam-v1.0.js     # CBA certification exam data
     ├── cgoa-exam-v1.0.js    # CGOA certification exam data
-    ├── ddf-exam-v1.0.js     # DDF certification exam data
-    └── cba-exam-v1.0.js     # CBA certification exam data
+    └── ddf-exam-v1.0.js     # DDF certification exam data
 
 ai-templates/                 # 🤖 AI-Assisted Exam Creation
-├── README.md                # AI templates overview and quick start
 ├── ai-prompt-template.md    # Complete AI prompt template
 ├── exam-code-template.js    # JavaScript code template
-├── registry-update-guide.md # Registry update instructions
+├── example-aws-saa-generation.md # AWS Solutions Architect Associate example
 ├── quality-checklist.md     # Quality assurance checklist
-└── example-aws-saa-generation.md # AWS Solutions Architect Associate example
+├── README.md                # AI templates overview and quick start
+└── registry-update-guide.md # Registry update instructions
 ```
 
 ## 🎯 Available Certifications
