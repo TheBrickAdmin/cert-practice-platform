@@ -40,6 +40,19 @@ const examRegistry = {
         topics: ['Essential Concepts', 'Agent Installation & Configuration', 'Networking & Data Collection', 'Troubleshooting Datadog', 'Data Visualization & Utilization', 'Monitors, Alerts & API Access'],
         difficulty: 'Beginner to Intermediate',
         lastUpdated: '2026-02-26'
+    },
+    'cba-v1.0': {
+        id: 'cba-v1.0',
+        name: 'CBA - Certified Backstage Associate',
+        description: 'Practice exam for the Certified Backstage Associate certification covering Backstage Development Workflow, Infrastructure, Software Catalog, and Customizing Backstage.',
+        file: 'exams/cba-exam-v1.0.js',
+        version: '1.0',
+        totalQuestions: 60,
+        practiceQuestionsNote: '60 practice questions in this platform',
+        passingScore: 75,
+        topics: ['Backstage Development Workflow', 'Backstage Infrastructure', 'Backstage Catalog', 'Customizing Backstage'],
+        difficulty: 'Intermediate',
+        lastUpdated: '2026-05-30'
     }
 };
 

@@ -1,6 +1,6 @@
 # 🎓 Certification Practice Platform
 
-A comprehensive, scalable web application for practicing certification exams with interactive features, real-time scoring, question flagging, and detailed progress tracking. Currently featuring both CAPA (Certified Argo Project Associate) and CGOA (Certified GitOps Associate) certification exam preparation.
+A comprehensive, scalable web application for practicing certification exams with interactive features, real-time scoring, question flagging, and detailed progress tracking. Currently featuring CAPA (Certified Argo Project Associate), CGOA (Certified GitOps Associate), DDF (Datadog Fundamentals), and CBA (Certified Backstage Associate) certification exam preparation.
 
 ## ⚠️ Important Disclaimer
 
@@ -71,7 +71,9 @@ src/                          # 📦 Shareable Application
 │   └── exam-functions.js    # Question handling, scoring, and reports
 └── exams/
     ├── capa-exam-v1.0.js    # CAPA certification exam data
-    └── cgoa-exam-v1.0.js    # CGOA certification exam data
+    ├── cgoa-exam-v1.0.js    # CGOA certification exam data
+    ├── ddf-exam-v1.0.js     # DDF certification exam data
+    └── cba-exam-v1.0.js     # CBA certification exam data
 
 ai-templates/                 # 🤖 AI-Assisted Exam Creation
 ├── README.md                # AI templates overview and quick start
@@ -128,6 +130,21 @@ ai-templates/                 # 🤖 AI-Assisted Exam Creation
 - **Data Visualization & Utilization**: 15 questions
 - **Monitors, Alerts & API Access**: 10 questions
 
+### 4. Certified Backstage Associate (CBA) v1.0
+- **📊 Questions**: 60 comprehensive practice questions
+- **🎯 Topics**: Backstage Development Workflow, Infrastructure, Software Catalog, Customizing Backstage
+- **✅ Passing Score**: 75% (Aim for 85%+ for exam readiness)
+- **⏱️ Time Limit**: 90 minutes (practice mode has no time limit)
+- **📈 Difficulty**: Intermediate
+
+#### Topic Coverage:
+- **Backstage Development Workflow** (24%): 14 questions
+- **Backstage Infrastructure** (22%): 13 questions
+- **Backstage Catalog** (22%): 13 questions
+- **Customizing Backstage** (32%): 20 questions
+
+
+
 ## 🚀 Getting Started
 
 ```powershell
@@ -143,7 +160,7 @@ python -m http.server 8000
 ```
 
 ### Features:
-- ✅ **Multiple exams** (CAPA + CGOA + more)
+- ✅ **Multiple exams** (CAPA + CGOA + DDF + CBA + more coming)
 - ✅ **Professional architecture**
 - ✅ **Question flagging and filtering**
 - ✅ **Easy to add new exams**
@@ -164,7 +181,7 @@ python -m http.server 8000
 ## 🎯 How to Use the Platform
 
 ### Study Workflow
-1. **Select Exam**: Choose from CAPA or CGOA certification exams
+1. **Select Exam**: Choose from CAPA, CGOA, DDF, or CBA certification exams
 2. **Configure Practice**: Set questions per page (5-100 or all)
 3. **Practice**: Answer questions with immediate feedback
 4. **Flag Questions**: Mark difficult questions for later review
