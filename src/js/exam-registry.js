@@ -53,6 +53,19 @@ const examRegistry = {
         topics: ['Backstage Development Workflow', 'Backstage Infrastructure', 'Backstage Catalog', 'Customizing Backstage'],
         difficulty: 'Intermediate',
         lastUpdated: '2026-05-30'
+    },
+    'pca-v1.0': {
+        id: 'pca-v1.0',
+        name: 'PCA - Prometheus Certified Associate',
+        description: 'Practice exam for the Prometheus Certified Associate certification covering observability concepts, Prometheus fundamentals, PromQL, instrumentation and exporters, and alerting and dashboarding.',
+        file: 'exams/pca-exam-v1.0.js',
+        version: '1.0',
+        totalQuestions: 100,
+        practiceQuestionsNote: '100 practice questions in this platform',
+        passingScore: 75,
+        topics: ['Observability Concepts', 'Prometheus Fundamentals', 'PromQL', 'Instrumentation and Exporters', 'Alerting & Dashboarding'],
+        difficulty: 'Beginner to Intermediate',
+        lastUpdated: '2026-06-13'
     }
 };
 

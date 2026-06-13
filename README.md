@@ -1,6 +1,6 @@
 # 🎓 Certification Practice Platform
 
-A comprehensive, scalable web application for practicing certification exams with interactive features, real-time scoring, question flagging, and detailed progress tracking. Currently featuring CAPA (Certified Argo Project Associate), CGOA (Certified GitOps Associate), DDF (Datadog Fundamentals), and CBA (Certified Backstage Associate) certification exam preparation.
+A comprehensive, scalable web application for practicing certification exams with interactive features, real-time scoring, question flagging, and detailed progress tracking. Currently featuring CAPA (Certified Argo Project Associate), CGOA (Certified GitOps Associate), DDF (Datadog Fundamentals), CBA (Certified Backstage Associate), and PCA (Prometheus Certified Associate) certification exam preparation.
 
 ## ⚠️ Important Disclaimer
 
@@ -73,7 +73,8 @@ src/                          # 📦 Shareable Application
     ├── capa-exam-v1.0.js    # CAPA certification exam data    
     ├── cba-exam-v1.0.js     # CBA certification exam data
     ├── cgoa-exam-v1.0.js    # CGOA certification exam data
-    └── ddf-exam-v1.0.js     # DDF certification exam data
+    ├── ddf-exam-v1.0.js     # DDF certification exam data
+    └── pca-exam-v1.0.js     # PCA certification exam data
 
 ai-templates/                 # 🤖 AI-Assisted Exam Creation
 ├── ai-prompt-template.md    # Complete AI prompt template
@@ -143,6 +144,20 @@ ai-templates/                 # 🤖 AI-Assisted Exam Creation
 - **Backstage Catalog** (22%): 13 questions
 - **Customizing Backstage** (32%): 20 questions
 
+### 5. Prometheus Certified Associate (PCA) v1.0
+- **📊 Questions**: 100 comprehensive practice questions
+- **🎯 Topics**: Observability Concepts, Prometheus Fundamentals, PromQL, Instrumentation & Exporters, Alerting & Dashboarding
+- **✅ Passing Score**: 75% (Aim for 85%+ for exam readiness)
+- **⏱️ Time Limit**: 90 minutes (practice mode has no time limit)
+- **📈 Difficulty**: Beginner to Intermediate
+
+#### Topic Coverage:
+- **Observability Concepts** (18%): 18 questions
+- **Prometheus Fundamentals** (20%): 20 questions
+- **PromQL** (28%): 28 questions
+- **Instrumentation and Exporters** (16%): 16 questions
+- **Alerting & Dashboarding** (18%): 18 questions
+
 
 
 ## 🚀 Getting Started
@@ -160,7 +175,7 @@ python -m http.server 8000
 ```
 
 ### Features:
-- ✅ **Multiple exams** (CAPA + CGOA + DDF + CBA + more coming)
+- ✅ **Multiple exams** (CAPA + CGOA + DDF + CBA + PCA + more coming)
 - ✅ **Professional architecture**
 - ✅ **Question flagging and filtering**
 - ✅ **Easy to add new exams**
@@ -181,7 +196,7 @@ python -m http.server 8000
 ## 🎯 How to Use the Platform
 
 ### Study Workflow
-1. **Select Exam**: Choose from CAPA, CGOA, DDF, or CBA certification exams
+1. **Select Exam**: Choose from CAPA, CGOA, DDF, CBA, or PCA certification exams
 2. **Configure Practice**: Set questions per page (5-100 or all)
 3. **Practice**: Answer questions with immediate feedback
 4. **Flag Questions**: Mark difficult questions for later review
